@@ -1,0 +1,18 @@
+{
+  "name": "Winter Arc 2026 — Discipline & Suivi",
+  "short_name": "Winter Arc",
+  "description": "Tracker d'habitudes et de discipline pour le Winter Arc 2026",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#070D16",
+  "theme_color": "#070D16",
+  "icons": [
+    {
+      "src": "img/Typographie%20hivernale%20WINTER%20ARC.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
