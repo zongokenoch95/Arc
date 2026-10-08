@@ -109,8 +109,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       margin-bottom: 14px;
+      flex-wrap: wrap;
     }
 
     .brand-wrap {
@@ -155,6 +156,44 @@
       display: flex;
       align-items: center;
       gap: 8px;
+    }
+
+    /* Cloud Sync Pill */
+    .sync-btn {
+      padding: 7px 12px;
+      font-size: 12.5px;
+      gap: 7px;
+      border-radius: 20px;
+    }
+
+    .sync-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+      background: #64748B;
+      transition: all 0.3s;
+    }
+
+    .sync-dot.synced {
+      background: #10B981;
+      box-shadow: 0 0 10px #10B981;
+    }
+
+    .sync-dot.offline {
+      background: #F59E0B;
+      box-shadow: 0 0 8px #F59E0B;
+    }
+
+    .sync-dot.syncing {
+      background: #38BDF8;
+      box-shadow: 0 0 10px #38BDF8;
+      animation: pulse 1.2s infinite;
+    }
+
+    .sync-dot.unconfigured {
+      background: #94A3B8;
+      opacity: 0.6;
     }
 
     /* Quote Card (Stoic / Murakami inspiration) */
@@ -795,8 +834,8 @@
       box-shadow: 0 0 6px var(--ember);
     }
 
-    /* Management View */
-    #manage {
+    /* Management & Modal Views */
+    #manage, #sync-modal {
       animation: fadeIn 0.25s ease-out;
     }
 
@@ -918,17 +957,51 @@
     <!-- En-tête avec Branding & Actions -->
     <header class="hd">
       <div class="brand-wrap">
-
+        <img src="img/Typographie%20hivernale%20WINTER%20ARC.png" alt="Winter Arc" class="brand-logo" onerror="this.style.display='none'">
         <div class="brand-title">
           <h1>WINTER ARC</h1>
           <p class="sub" id="sub">Chargement du parcours…</p>
         </div>
       </div>
       <div class="hd-actions">
+        <button class="btn sync-btn" id="sync-btn" aria-label="Synchronisation Cloud" title="Statut de synchronisation Cloud">
+          <span class="sync-dot unconfigured" id="sync-dot"></span>
+          <span class="sync-lbl" id="sync-lbl">Cloud</span>
+        </button>
         <button class="btn icon-only" id="theme-btn" aria-label="Changer de thème" title="Basculer thème">🌙</button>
         <button class="btn" id="mng">⚙️ Gérer</button>
       </div>
     </header>
+
+    <!-- Modal / Vue Synchronisation Cloud Firebase -->
+    <section id="sync-modal" class="hide">
+      <div class="section-title">
+        <h2>Synchronisation Cloud (Firebase)</h2>
+        <button class="btn p" id="sync-close">✓ Fermer</button>
+      </div>
+      <p class="leg">Synchronisez automatiquement vos données entre votre smartphone et votre PC. Fonctionne 100% hors-ligne (envoi automatique dès le retour d'Internet).</p>
+      
+      <div class="h manage-h" style="margin-bottom:14px">
+        <div class="t" style="margin-bottom:4px">1. Code de synchronisation partagé</div>
+        <span class="d" style="margin-bottom:10px">Entrez exactement ce même identifiant sur votre smartphone et sur votre PC pour lier les deux appareils.</span>
+        <input type="text" id="sync-id-input" placeholder="ex: enoch-winter-2026" maxlength="50">
+      </div>
+
+      <div class="h manage-h" style="margin-bottom:14px">
+        <div class="t" style="margin-bottom:4px">2. Configuration Firebase</div>
+        <span class="d" style="margin-bottom:10px">Collez l'objet de configuration fourni par Firebase Console.</span>
+        <textarea id="sync-cfg-input" style="height:115px;font-family:monospace;font-size:12px" placeholder='{\n  "apiKey": "AIzaSy...",\n  "projectId": "winter-arc-...",\n  "appId": "..."\n}'></textarea>
+      </div>
+
+      <div class="row" style="margin-bottom:12px">
+        <button class="btn p" id="sync-save-btn">☁️ Activer la synchronisation</button>
+        <button class="btn dng" id="sync-disconnect-btn">Déconnecter</button>
+      </div>
+
+      <div id="sync-status-details" class="leg" style="padding:10px;border-radius:10px;background:var(--cell)">
+        Statut : Mode 100% local actif.
+      </div>
+    </section>
 
     <!-- Bannière Stoïcienne Murakami & Illustration Montagne -->
     <aside class="quote-card" id="quote-card">
@@ -947,10 +1020,9 @@
         <h2>Gérer les habitudes</h2>
         <button class="btn p" id="done">✓ Terminé</button>
       </div>
-      <p class="leg">Modifie le nom, affine la description ou supprime une habitude. Tout est sauvegardé
-        automatiquement.</p>
+      <p class="leg">Modifie le nom, affine la description ou supprime une habitude. Tout est sauvegardé automatiquement.</p>
       <ul id="mlist" class="habit-list"></ul>
-
+      
       <div class="h manage-h">
         <div class="t" style="margin-bottom:8px">Nouvelle habitude</div>
         <div class="m">
@@ -1044,7 +1116,7 @@
     </section>
   </main>
 
-  <script>
+  <script type="module">
     const DEF = [
       ["Discipline sexuelle", "Zéro pulsion suivie, attention protégée"],
       ["Réveil avant 6h00", "Le calme du matin pour toi"],
@@ -1062,6 +1134,8 @@
     ];
 
     const K2 = "winterarc2026v2", K1 = "winterarc2026", THEME_KEY = "winterarc_theme";
+    const FIREBASE_CFG_KEY = "winterarc_firebase_cfg", SYNC_ID_KEY = "winterarc_sync_id";
+    
     // Heure calée à 12h00 pour éviter tout décalage d'heure lors du changement d'heure d'hiver fin octobre
     const START = new Date(2026, 9, 7, 12, 0, 0);
     const END = new Date(2026, 11, 31, 12, 0, 0);
@@ -1108,7 +1182,7 @@
         }
       } catch (e) { }
 
-      const s = { habits: DEF.map((h, i) => ({ id: "h" + i, n: h[0], d: h[1] })), log: {} };
+      const s = { habits: DEF.map((h, i) => ({ id: "h" + i, n: h[0], d: h[1] })), log: {}, updatedAt: Date.now() };
       try {
         const r = localStorage.getItem(K1);
         if (r) {
@@ -1123,8 +1197,16 @@
     }
     S = load();
 
+    const saveLocal = () => {
+      try { 
+        S.updatedAt = Date.now();
+        localStorage.setItem(K2, JSON.stringify(S)); 
+      } catch (e) { }
+    };
+
     const save = () => {
-      try { localStorage.setItem(K2, JSON.stringify(S)); } catch (e) { }
+      saveLocal();
+      pushToCloud();
     };
 
     const ent = (k, id) => (S.log[k] && S.log[k][id]) || {};
@@ -1187,7 +1269,7 @@
         particles.forEach(p => {
           p.x += p.vx;
           p.y += p.vy;
-          p.vy += 0.2; // gravité
+          p.vy += 0.2;
           p.alpha -= 0.016;
           if (p.alpha > 0) {
             alive = true;
@@ -1215,7 +1297,6 @@
       $("sub").textContent = `Jour ${ti + 1} sur ${KEYS.length} · Jusqu'au 31 décembre`;
       $("dlabel").textContent = d.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
 
-      // Badge du jour & bouton retour
       const isToday = sel === ti;
       $("dsub").className = `day-badge${isToday ? " today" : ""}`;
       $("dsub").textContent = isToday ? "Aujourd'hui" : (sel < ti ? "Jour passé" : "À venir");
@@ -1255,8 +1336,7 @@
       }).join("") : '<li class="leg">Aucune habitude active. Clique sur « Gérer » pour en configurer.</li>';
 
       // Grille / Heatmap alignée Lun-Dim
-      // Offset du premier jour (START est un mercredi -> 2 cases vides pour Lun & Mar)
-      const firstDayWeekIndex = (DAYS[0].getDay() + 6) % 7; // Lun=0, Mar=1, Mer=2...
+      const firstDayWeekIndex = (DAYS[0].getDay() + 6) % 7;
       let gridHtml = "";
       for (let p = 0; p < firstDayWeekIndex; p++) {
         gridHtml += '<div class="c empty"></div>';
@@ -1296,6 +1376,191 @@
     </li>
   `).join("");
     }
+
+    /* ========================================================
+       MOTEUR DE SYNCHRONISATION FIREBASE (OFFLINE-FIRST)
+       ======================================================== */
+    let db = null;
+    let syncUnsub = null;
+
+    function updateSyncUI(status, label) {
+      const dot = $("sync-dot");
+      const lbl = $("sync-lbl");
+      dot.className = `sync-dot ${status}`;
+      if (label) lbl.textContent = label;
+    }
+
+    function mergeState(local, remote) {
+      if (!remote) return local;
+      const merged = {
+        habits: (remote.habits && remote.habits.length) ? remote.habits : local.habits,
+        log: Object.assign({}, local.log || {}),
+        updatedAt: Math.max(local.updatedAt || 0, remote.updatedAt || 0)
+      };
+      if (remote.log) {
+        for (const dateKey in remote.log) {
+          if (!merged.log[dateKey]) {
+            merged.log[dateKey] = remote.log[dateKey];
+          } else {
+            merged.log[dateKey] = Object.assign({}, merged.log[dateKey], remote.log[dateKey]);
+          }
+        }
+      }
+      return merged;
+    }
+
+    async function pushToCloud() {
+      if (!db) return;
+      const syncId = (localStorage.getItem(SYNC_ID_KEY) || "enoch-winter-2026").trim();
+      try {
+        const { doc, setDoc } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
+        const docRef = doc(db, "winterarc_sync", syncId);
+        await setDoc(docRef, {
+          habits: S.habits,
+          log: S.log,
+          updatedAt: S.updatedAt || Date.now()
+        }, { merge: true });
+      } catch (e) {
+        console.warn("Mise en file d'attente locale Firestore (hors-ligne ou réseau instable) :", e);
+      }
+    }
+
+    async function initFirebase() {
+      const cfgStr = localStorage.getItem(FIREBASE_CFG_KEY);
+      const syncId = localStorage.getItem(SYNC_ID_KEY) || "enoch-winter-2026";
+      $("sync-id-input").value = syncId;
+
+      if (!cfgStr) {
+        updateSyncUI("unconfigured", "Cloud");
+        $("sync-status-details").innerHTML = "Statut : <b>Non configuré</b> (Mode 100% local actif). Cliquez pour connecter votre projet Firebase.";
+        return;
+      }
+
+      $("sync-cfg-input").value = cfgStr;
+      updateSyncUI("syncing", "Connexion...");
+
+      try {
+        let cfg;
+        try {
+          cfg = JSON.parse(cfgStr);
+        } catch(e) {
+          // Essai d'extraction d'objet JS si collé avec const firebaseConfig = {...}
+          const clean = cfgStr.replace(/const\s+\w+\s*=\s*/, "").replace(/;\s*$/, "").trim();
+          cfg = new Function(`return (${clean})`)();
+        }
+
+        const { initializeApp, getApps } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
+        const {
+          initializeFirestore,
+          persistentLocalCache,
+          persistentMultipleTabManager,
+          getFirestore,
+          doc,
+          onSnapshot
+        } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
+
+        const app = getApps().length === 0 ? initializeApp(cfg) : getApps()[0];
+
+        try {
+          db = initializeFirestore(app, {
+            localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() })
+          });
+        } catch (e) {
+          db = getFirestore(app);
+        }
+
+        if (syncUnsub) syncUnsub();
+        const docRef = doc(db, "winterarc_sync", syncId);
+
+        syncUnsub = onSnapshot(docRef, { includeMetadataChanges: true }, (snap) => {
+          const hasPendingWrites = snap.metadata.hasPendingWrites;
+          if (snap.exists()) {
+            const remote = snap.data();
+            if (remote && remote.habits && remote.log) {
+              const remoteTime = remote.updatedAt || 0;
+              const localTime = S.updatedAt || 0;
+              if (remoteTime > localTime) {
+                S = mergeState(S, remote);
+                saveLocal();
+                render();
+              }
+            }
+          }
+
+          if (hasPendingWrites) {
+            updateSyncUI("offline", "En attente");
+            $("sync-status-details").innerHTML = `Statut : <b>🟠 Hors-ligne / En attente</b>. Données enregistrées dans le cache de votre appareil. Dès que la connexion sera rétablie, elles seront envoyées à Google Cloud.`;
+          } else {
+            updateSyncUI("synced", "Synchro");
+            $("sync-status-details").innerHTML = `Statut : <b>🟢 Connecté & Synchronisé</b>. Vos données sont synchronisées sur tous les appareils utilisant l'ID : <code>${esc(syncId)}</code>.`;
+          }
+        }, (err) => {
+          console.warn("Écoute Firestore interrompue :", err);
+          updateSyncUI("offline", "Hors-ligne");
+          $("sync-status-details").innerHTML = `Statut : <b>⚠️ Connexion réseau coupée</b>. Vous êtes en mode hors-ligne, vos données restent enregistrées localement sans aucun risque de perte.`;
+        });
+
+      } catch (err) {
+        console.error("Échec d'initialisation Firebase :", err);
+        updateSyncUI("offline", "Local");
+        $("sync-status-details").innerHTML = `Statut : <b>⚠️ Erreur de configuration</b> (${esc(err.message)}). Vérifiez le format de votre objet Firebase.`;
+      }
+    }
+
+    // Gestion de l'état réseau navigateur
+    window.addEventListener("online", () => {
+      if (db) {
+        updateSyncUI("syncing", "Synchro...");
+        pushToCloud();
+      }
+    });
+    window.addEventListener("offline", () => {
+      if (db) updateSyncUI("offline", "Hors-ligne");
+    });
+
+    /* Interactions de Synchronisation */
+    $("sync-btn").onclick = () => {
+      $("sync-modal").classList.remove("hide");
+      $("track").classList.add("hide");
+      $("manage").classList.add("hide");
+      $("quote-card").classList.add("hide");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    $("sync-close").onclick = () => {
+      $("sync-modal").classList.add("hide");
+      $("track").classList.remove("hide");
+      $("quote-card").classList.remove("hide");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    $("sync-save-btn").onclick = async () => {
+      const syncId = ($("sync-id-input").value || "enoch-winter-2026").trim();
+      const cfgRaw = $("sync-cfg-input").value.trim();
+
+      if (!cfgRaw) {
+        alert("Veuillez coller votre configuration Firebase.");
+        return;
+      }
+
+      localStorage.setItem(SYNC_ID_KEY, syncId);
+      localStorage.setItem(FIREBASE_CFG_KEY, cfgRaw);
+      await initFirebase();
+      await pushToCloud();
+      msg("✓ Synchronisation configurée avec succès !");
+    };
+
+    $("sync-disconnect-btn").onclick = () => {
+      if (confirm("Voulez-vous déconnecter la synchronisation Cloud sur cet appareil ? Les données locales seront conservées.")) {
+        localStorage.removeItem(FIREBASE_CFG_KEY);
+        if (syncUnsub) { syncUnsub(); syncUnsub = null; }
+        db = null;
+        $("sync-cfg-input").value = "";
+        updateSyncUI("unconfigured", "Cloud");
+        $("sync-status-details").innerHTML = "Statut : Déconnecté (Mode 100% local actif).";
+        msg("Cloud déconnecté.");
+      }
+    };
 
     /* Interactions & Événements */
     $("list").onclick = e => {
@@ -1342,6 +1607,7 @@
       $("manage").classList.toggle("hide", !on);
       $("track").classList.toggle("hide", on);
       $("mng").classList.toggle("hide", on);
+      $("sync-modal").classList.add("hide");
       $("quote-card").classList.toggle("hide", on);
       pend = null;
       if (on) renderManage();
@@ -1393,7 +1659,7 @@
       renderManage();
     };
 
-    /* Sauvegarde & Restauration */
+    /* Sauvegarde Locale Manuelle */
     const msg = t => {
       $("msg").textContent = t;
       setTimeout(() => { if ($("msg").textContent === t) $("msg").textContent = ""; }, 4000);
@@ -1424,9 +1690,10 @@
       }
     };
 
-    // Initialisation au chargement
+    // Initialisation
     initTheme();
     render();
+    initFirebase();
   </script>
 </body>
 
