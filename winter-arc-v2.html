@@ -4,10 +4,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#070D16">
+  <meta name="theme-color" content="#090E17">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="img/Typographie%20hivernale%20WINTER%20ARC.png">
-  <title>Winter Arc 2026 — Discipline & Progression</title>
+  <title>Winter Arc 2026 — Habits & Progression</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -15,66 +15,50 @@
     rel="stylesheet">
   <style>
     :root {
-      --bg: #070D16;
-      --bg-gradient: radial-gradient(circle at 50% 0%, #0F2238 0%, #070D16 70%);
-      --card: rgba(15, 27, 44, 0.75);
-      --card-hover: rgba(22, 38, 62, 0.9);
-      --card-border: rgba(148, 196, 230, 0.12);
-      --ink: #F0F6FC;
-      --mute: #8CA3BA;
-      --faint: #3A4F65;
-      --line: rgba(148, 196, 230, 0.14);
+      --bg: #090E17;
+      --bg-gradient: radial-gradient(circle at 50% 0%, #111A29 0%, #090E17 75%);
+      --card: rgba(17, 24, 38, 0.88);
+      --card-hover: rgba(22, 32, 50, 0.95);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --ink: #F3F7FC;
+      --mute: #8E9FB4;
+      --faint: #475569;
+      --line: rgba(255, 255, 255, 0.08);
       --ice: #38BDF8;
       --ice-glow: rgba(56, 189, 248, 0.35);
-      --ice-bg: rgba(56, 189, 248, 0.12);
-      --ice-grad: linear-gradient(135deg, #0284C7, #38BDF8);
       --ember: #FB923C;
       --ember-glow: rgba(251, 146, 60, 0.35);
-      --ember-grad: linear-gradient(135deg, #EA580C, #FB923C);
       --ko: #F43F5E;
-      --ko-glow: rgba(244, 63, 94, 0.3);
-      --ko-bg: rgba(244, 63, 94, 0.12);
-      --cell: #101E2E;
-      --cell-hover: #192D44;
-      --onc: #04121F;
-      --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.25);
-      --shadow-lg: 0 12px 36px -4px rgba(0, 0, 0, 0.45);
-      --glass: blur(14px);
-      --radius-card: 18px;
+      --cell-empty: #1A2436;
+      --cell-fut: #121926;
+      --glass: blur(16px);
+      --radius-card: 20px;
       --radius-sm: 10px;
+      --shadow-card: 0 10px 30px -6px rgba(0, 0, 0, 0.5);
     }
 
     :root[data-theme="light"] {
-      --bg: #F2F7FA;
-      --bg-gradient: radial-gradient(circle at 50% 0%, #E2EEF6 0%, #F2F7FA 65%);
-      --card: rgba(255, 255, 255, 0.85);
+      --bg: #F1F5F9;
+      --bg-gradient: radial-gradient(circle at 50% 0%, #E2E8F0 0%, #F1F5F9 75%);
+      --card: rgba(255, 255, 255, 0.92);
       --card-hover: #FFFFFF;
-      --card-border: rgba(186, 212, 230, 0.6);
-      --ink: #0B1928;
-      --mute: #546C82;
-      --faint: #9FB2C2;
-      --line: rgba(186, 212, 230, 0.55);
+      --card-border: rgba(148, 163, 184, 0.35);
+      --ink: #0F172A;
+      --mute: #64748B;
+      --faint: #94A3B8;
+      --line: rgba(148, 163, 184, 0.25);
       --ice: #0284C7;
       --ice-glow: rgba(2, 132, 199, 0.25);
-      --ice-bg: rgba(2, 132, 199, 0.08);
-      --ice-grad: linear-gradient(135deg, #0284C7, #0EA5E9);
       --ember: #EA580C;
       --ember-glow: rgba(234, 88, 12, 0.25);
-      --ember-grad: linear-gradient(135deg, #EA580C, #F97316);
       --ko: #E11D48;
-      --ko-glow: rgba(225, 29, 72, 0.2);
-      --ko-bg: rgba(225, 29, 72, 0.08);
-      --cell: #E2ECF2;
-      --cell-hover: #D5E4EC;
-      --onc: #FFFFFF;
-      --shadow-sm: 0 4px 14px rgba(16, 38, 58, 0.06);
-      --shadow-lg: 0 12px 32px -4px rgba(16, 38, 58, 0.09);
-      --glass: blur(12px);
+      --cell-empty: #E2E8F0;
+      --cell-fut: #EDF2F7;
+      --glass: blur(14px);
+      --shadow-card: 0 8px 24px -4px rgba(15, 23, 42, 0.08);
     }
 
-    *,
-    *:before,
-    *:after {
+    *, *:before, *:after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -94,244 +78,442 @@
       line-height: 1.45;
       min-height: 100vh;
       padding-top: env(safe-area-inset-top, 0px);
-      padding-bottom: env(safe-area-inset-bottom, 20px);
+      padding-bottom: env(safe-area-inset-bottom, 80px);
       -webkit-font-smoothing: antialiased;
     }
 
     main {
-      max-width: 580px;
+      max-width: 560px;
       margin: 0 auto;
-      padding: 20px 18px 48px;
+      padding: 16px 14px 72px;
     }
 
-    /* Header & Brand */
-    .hd {
+    /* Top Bar Header */
+    .top-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-    }
-
-    .brand-wrap {
-      display: flex;
-      align-items: center;
       gap: 12px;
+      margin-bottom: 16px;
     }
 
-    .brand-logo {
-      height: 44px;
-      width: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 2px 8px var(--ice-glow));
-      border-radius: 6px;
-    }
-
-    .brand-title {
+    .app-title-wrap {
       display: flex;
-      flex-direction: column;
+      align-items: baseline;
+      gap: 8px;
     }
 
-    .brand-title h1 {
+    .app-title {
       font-family: 'Outfit', sans-serif;
-      font-size: 26px;
+      font-size: 28px;
       font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      background: linear-gradient(135deg, var(--ink) 30%, var(--ice) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.03em;
+      color: var(--ink);
     }
 
-    .sub {
-      color: var(--mute);
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.01em;
-      margin-top: 2px;
+    .app-badge {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--ember);
+      background: rgba(251, 146, 60, 0.12);
+      border: 1px solid rgba(251, 146, 60, 0.25);
+      padding: 2px 7px;
+      border-radius: 12px;
+      letter-spacing: 0.02em;
     }
 
-    .hd-actions {
+    .top-controls {
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
+    /* Segmented Control Tabs (Single / Weekly / Yearly) */
+    .view-tabs {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: var(--glass);
+      -webkit-backdrop-filter: var(--glass);
+      border: 1px solid var(--card-border);
+      padding: 4px;
+      border-radius: 14px;
+      display: flex;
+      gap: 4px;
+      margin-bottom: 18px;
+    }
+
+    :root[data-theme="light"] .view-tabs {
+      background: rgba(226, 232, 240, 0.7);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 7px 10px;
+      font-size: 12.5px;
+      font-weight: 600;
+      border-radius: 10px;
+      border: none;
+      background: transparent;
+      color: var(--mute);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .tab-btn:hover {
+      color: var(--ink);
+    }
+
+    .tab-btn.active {
+      background: var(--card);
+      color: var(--ink);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    :root[data-theme="light"] .tab-btn.active {
+      background: #FFFFFF;
+      color: #0F172A;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    }
+
     /* Cloud Sync Pill */
     .sync-btn {
-      padding: 7px 12px;
-      font-size: 12.5px;
-      gap: 7px;
+      padding: 6px 10px;
+      font-size: 11.5px;
+      font-weight: 600;
+      gap: 6px;
       border-radius: 20px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      color: var(--ink);
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s;
     }
 
     .sync-dot {
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      display: inline-block;
       background: #64748B;
       transition: all 0.3s;
     }
 
     .sync-dot.synced {
       background: #10B981;
-      box-shadow: 0 0 10px #10B981;
+      box-shadow: 0 0 8px #10B981;
     }
 
     .sync-dot.offline {
       background: #F59E0B;
-      box-shadow: 0 0 8px #F59E0B;
+      box-shadow: 0 0 6px #F59E0B;
     }
 
     .sync-dot.syncing {
       background: #38BDF8;
-      box-shadow: 0 0 10px #38BDF8;
+      box-shadow: 0 0 8px #38BDF8;
       animation: pulse 1.2s infinite;
     }
 
-    .sync-dot.unconfigured {
-      background: #94A3B8;
-      opacity: 0.6;
-    }
-
-    /* Quote Card (Stoic / Murakami inspiration) */
-    .quote-card {
-      position: relative;
-      border-radius: var(--radius-card);
-      overflow: hidden;
-      margin-bottom: 18px;
-      border: 1px solid var(--card-border);
-      box-shadow: var(--shadow-sm);
+    .btn-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
       background: var(--card);
-      backdrop-filter: var(--glass);
-      -webkit-backdrop-filter: var(--glass);
+      border: 1px solid var(--card-border);
+      color: var(--ink);
       display: flex;
       align-items: center;
-      min-height: 82px;
-    }
-
-    .quote-thumb {
-      width: 90px;
-      height: 100%;
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      object-fit: cover;
-      opacity: 0.85;
-      filter: contrast(1.1);
-      mask-image: linear-gradient(to right, black 55%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, black 55%, transparent 100%);
-    }
-
-    .quote-content {
-      position: relative;
-      padding: 12px 14px 12px 98px;
-      font-size: 12.5px;
-      font-style: italic;
-      color: var(--ink);
-      line-height: 1.4;
-    }
-
-    .quote-author {
-      display: block;
-      font-size: 11px;
-      color: var(--mute);
-      font-style: normal;
-      font-weight: 600;
-      margin-top: 4px;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-    }
-
-    /* Buttons & Controls */
-    .btn {
-      border: 1px solid var(--line);
-      background: var(--card);
-      color: var(--ink);
-      border-radius: 12px;
-      padding: 8px 14px;
-      font: inherit;
-      font-size: 13.5px;
-      font-weight: 600;
-      min-height: 40px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
       justify-content: center;
-      gap: 6px;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      backdrop-filter: var(--glass);
-      -webkit-backdrop-filter: var(--glass);
+      cursor: pointer;
+      font-size: 15px;
+      transition: all 0.2s;
     }
 
-    .btn:hover {
-      background: var(--card-hover);
+    .btn-icon:hover {
       border-color: var(--ice);
       transform: translateY(-1px);
     }
 
-    .btn:active {
-      transform: translateY(0) scale(0.98);
-    }
-
-    .btn.p {
-      background: var(--ice-grad);
-      border-color: transparent;
-      color: var(--onc);
-      box-shadow: 0 4px 16px var(--ice-glow);
-    }
-
-    .btn.p:hover {
-      filter: brightness(1.08);
-      box-shadow: 0 6px 20px var(--ice-glow);
-    }
-
-    .btn.icon-only {
-      width: 40px;
-      height: 40px;
-      padding: 0;
-      border-radius: 50%;
-      font-size: 16px;
-    }
-
-    .btn.dng {
-      color: var(--ko);
-      border-color: rgba(244, 63, 94, 0.3);
-      background: var(--ko-bg);
-    }
-
-    .btn.dng:hover {
-      border-color: var(--ko);
-      box-shadow: 0 4px 14px var(--ko-glow);
-    }
-
-    /* Day Navigator Bar */
-    .day {
+    /* Overall Summary Banner */
+    .summary-card {
       background: var(--card);
       backdrop-filter: var(--glass);
       -webkit-backdrop-filter: var(--glass);
       border: 1px solid var(--card-border);
       border-radius: var(--radius-card);
-      padding: 10px 14px;
+      padding: 14px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .summary-left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .summary-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .summary-sub {
+      font-size: 12px;
+      color: var(--mute);
+    }
+
+    .summary-score {
+      font-family: 'Outfit', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--ice);
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* =========================================================
+       HABIT CARD WITH MINI HEATMAP (INSPIRATION SCREENSHOT)
+       ========================================================= */
+    .habits-container {
+      display: grid;
+      gap: 14px;
+    }
+
+    .habit-card {
+      background: var(--card);
+      backdrop-filter: var(--glass);
+      -webkit-backdrop-filter: var(--glass);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-card);
+      padding: 16px;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s;
+      position: relative;
+    }
+
+    .habit-card:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+      transform: translateY(-1px);
+    }
+
+    /* Card Top Header */
+    .habit-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .habit-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .habit-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--h-color, var(--ice));
+      box-shadow: 0 0 12px var(--h-glow, transparent);
+      flex-shrink: 0;
+    }
+
+    .habit-details {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .habit-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .habit-desc {
+      font-size: 11.5px;
+      color: var(--mute);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .habit-right {
+      display: flex;
+      align-items: center;
       gap: 8px;
-      margin-bottom: 14px;
-      box-shadow: var(--shadow-sm);
+      flex-shrink: 0;
+    }
+
+    .habit-streak {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--ember);
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .habit-total {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--mute);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Quick Check Toggle Button */
+    .habit-check-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      border: 1.5px solid var(--card-border);
+      background: var(--cell-empty);
+      color: var(--mute);
+      font-size: 15px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .habit-check-btn:hover {
+      transform: scale(1.08);
+      border-color: var(--h-color, var(--ice));
+      color: var(--h-color, var(--ice));
+    }
+
+    .habit-check-btn.checked {
+      background: var(--h-color, var(--ice));
+      border-color: var(--h-color, var(--ice));
+      color: #FFFFFF;
+      box-shadow: 0 0 16px var(--h-glow, transparent);
+    }
+
+    /* Mini Heatmap Grid (86 days = 13 weeks columns x 7 weekdays rows) */
+    .heatmap-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding-top: 2px;
+    }
+
+    .heatmap-months {
+      display: grid;
+      grid-template-columns: repeat(13, 1fr);
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--mute);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding-left: 1px;
+    }
+
+    .m-label-oct { grid-column: 1 / span 4; }
+    .m-label-nov { grid-column: 5 / span 4; }
+    .m-label-dec { grid-column: 9 / span 5; }
+
+    .heatmap-grid {
+      display: grid;
+      grid-template-columns: repeat(13, 1fr);
+      grid-template-rows: repeat(7, 1fr);
+      grid-auto-flow: column;
+      gap: 4px;
+    }
+
+    .dot {
+      aspect-ratio: 1;
+      border-radius: 3.5px;
+      background: var(--cell-empty);
+      border: 1px solid transparent;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .dot:hover {
+      transform: scale(1.35);
+      z-index: 10;
+      box-shadow: 0 0 8px var(--h-glow, rgba(255,255,255,0.4));
+    }
+
+    .dot.empty-slot {
+      background: transparent;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .dot.fut {
+      background: var(--cell-fut);
+      opacity: 0.35;
+    }
+
+    .dot.active {
+      background: var(--h-color, var(--ice)) !important;
+      box-shadow: 0 0 6px var(--h-glow, transparent);
+    }
+
+    .dot.ko {
+      background: rgba(244, 63, 94, 0.45) !important;
+    }
+
+    .dot.today {
+      outline: 1.5px solid var(--ink);
+      outline-offset: 1px;
+    }
+
+    /* Daily Focused View */
+    .daily-view {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .day-selector {
+      background: var(--card);
+      backdrop-filter: var(--glass);
+      -webkit-backdrop-filter: var(--glass);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-card);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      box-shadow: var(--shadow-card);
     }
 
     .day-btn {
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      border: 1px solid var(--line);
-      background: var(--card);
+      background: var(--cell-empty);
+      border: 1px solid var(--card-border);
       color: var(--ink);
-      font-size: 20px;
+      font-size: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -339,254 +521,180 @@
       transition: all 0.2s;
     }
 
-    .day-btn:hover:not(:disabled) {
-      border-color: var(--ice);
-      background: var(--ice-bg);
-      color: var(--ice);
-      transform: scale(1.06);
-    }
-
     .day-btn:disabled {
       opacity: 0.25;
       cursor: not-allowed;
     }
 
-    .day-center {
+    .day-info {
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
     }
 
-    .day-title {
+    .day-text {
       font-family: 'Outfit', sans-serif;
       font-size: 17px;
       font-weight: 700;
       text-transform: capitalize;
-      letter-spacing: -0.01em;
     }
 
-    .day-badge-wrap {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .day-badge {
-      font-size: 11.5px;
-      font-weight: 600;
-      color: var(--mute);
-      padding: 2px 8px;
-      border-radius: 20px;
-      background: var(--cell);
-    }
-
-    .day-badge.today {
-      color: var(--ember);
-      background: rgba(251, 146, 60, 0.12);
-      border: 1px solid rgba(251, 146, 60, 0.25);
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .day-badge.today:before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--ember);
-      box-shadow: 0 0 8px var(--ember);
-      animation: pulse 2s infinite;
-    }
-
-    .jump-today {
-      font-size: 11px;
-      color: var(--ice);
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      text-decoration: underline;
-      padding: 0;
-      font-weight: 600;
-    }
-
-    /* Score Card */
-    .score {
-      background: var(--card);
-      backdrop-filter: var(--glass);
-      -webkit-backdrop-filter: var(--glass);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-card);
-      padding: 18px 20px;
-      margin-bottom: 16px;
-      box-shadow: var(--shadow-sm);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .score:before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--ice-grad);
-      opacity: 0.8;
-    }
-
-    .score .top {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .score .n {
-      font-family: 'Outfit', sans-serif;
-      font-size: 54px;
-      font-weight: 800;
-      line-height: 0.95;
-      letter-spacing: -0.04em;
-      font-variant-numeric: tabular-nums;
-      display: flex;
-      align-items: baseline;
-    }
-
-    .score .n span {
-      background: linear-gradient(135deg, var(--ink) 40%, var(--ice) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .score .n small {
-      font-size: 20px;
-      color: var(--mute);
-      font-weight: 500;
-      margin-left: 4px;
-      -webkit-text-fill-color: var(--mute);
-    }
-
-    .score-meta {
-      text-align: right;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .score-counts {
-      font-size: 13.5px;
-      font-weight: 600;
-      color: var(--ink);
-    }
-
-    .score-desc {
+    .day-sub {
       font-size: 12px;
       color: var(--mute);
     }
 
-    .bar {
-      height: 10px;
-      border-radius: 8px;
-      background: var(--cell);
-      margin-top: 14px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .bar i {
-      display: block;
-      height: 100%;
-      width: 0;
-      background: var(--ice-grad);
-      border-radius: 8px;
-      box-shadow: 0 0 14px var(--ice-glow);
-      transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* Habits List */
-    ul.habit-list {
-      list-style: none;
-      margin: 0 0 20px;
-      padding: 0;
-      display: grid;
-      gap: 10px;
-    }
-
-    .h {
+    .daily-habit-item {
       background: var(--card);
       backdrop-filter: var(--glass);
       -webkit-backdrop-filter: var(--glass);
       border: 1px solid var(--card-border);
       border-radius: 16px;
       padding: 14px 16px;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: var(--shadow-card);
       position: relative;
-      overflow: hidden;
     }
 
-    .h:hover {
-      background: var(--card-hover);
-      border-color: rgba(148, 196, 230, 0.25);
-      transform: translateY(-1px);
+    .daily-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
     }
 
-    .h:before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 3.5px;
-      background: transparent;
-      transition: background 0.25s;
-    }
-
-    .h.ok:before {
-      background: var(--ice);
-      box-shadow: 0 0 10px var(--ice-glow);
-    }
-
-    .h.ko:before {
-      background: var(--ko);
-      box-shadow: 0 0 10px var(--ko-glow);
-    }
-
-    .h-info {
-      margin-bottom: 10px;
-    }
-
-    .t {
-      font-family: 'Outfit', sans-serif;
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      color: var(--ink);
-    }
-
-    .d {
-      display: block;
-      font-size: 13px;
-      color: var(--mute);
-      font-weight: 400;
-      margin-top: 2px;
-    }
-
-    .acts {
+    .daily-acts {
       display: flex;
       gap: 8px;
     }
 
-    .b {
-      flex: 1;
-      min-height: 42px;
+    .btn-act {
+      padding: 7px 12px;
       border-radius: 10px;
-      border: 1.5px solid var(--line);
-      background: var(--cell);
+      font-size: 13px;
+      font-weight: 600;
+      border: 1.5px solid var(--card-border);
+      background: var(--cell-empty);
       color: var(--ink);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-act.on-ok {
+      background: var(--ice);
+      border-color: var(--ice);
+      color: #04121F;
+      font-weight: 700;
+    }
+
+    .btn-act.on-ko {
+      background: var(--ko);
+      border-color: var(--ko);
+      color: #FFFFFF;
+      font-weight: 700;
+    }
+
+    .btn-act.note-btn.has {
+      border-color: var(--ice);
+      color: var(--ice);
+    }
+
+    textarea.note-box {
+      width: 100%;
+      height: 64px;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+      background: var(--cell-empty);
+      color: var(--ink);
+      padding: 8px 12px;
+      font: inherit;
+      font-size: 13px;
+      resize: vertical;
+    }
+
+    textarea.note-box:focus {
+      outline: none;
+      border-color: var(--ice);
+    }
+
+    /* Floating Action Button (FAB) */
+    .fab-add {
+      position: fixed;
+      right: 22px;
+      bottom: 24px;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8B5CF6, #6366F1);
+      color: #FFFFFF;
+      font-size: 26px;
+      font-weight: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      box-shadow: 0 8px 24px rgba(139, 92, 246, 0.45);
+      cursor: pointer;
+      z-index: 100;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s;
+    }
+
+    .fab-add:hover {
+      transform: scale(1.1) rotate(90deg);
+      box-shadow: 0 10px 28px rgba(139, 92, 246, 0.6);
+    }
+
+    .fab-add:active {
+      transform: scale(0.95);
+    }
+
+    /* Modals & Overlays */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 1000;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .modal-sheet {
+      background: var(--bg);
+      background-image: var(--bg-gradient);
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      max-width: 480px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 22px;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6);
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .modal-head h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--ink);
+      border-radius: 12px;
+      padding: 9px 16px;
       font: inherit;
       font-size: 13.5px;
       font-weight: 600;
@@ -595,297 +703,74 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.2s;
     }
 
-    .b:hover {
+    .btn:hover {
       border-color: var(--ice);
-      color: var(--ice);
     }
 
-    .b.on-ok {
-      background: var(--ice-grad);
+    .btn.p {
+      background: linear-gradient(135deg, #0284C7, #38BDF8);
       border-color: transparent;
-      color: var(--onc);
+      color: #04121F;
+      font-weight: 700;
       box-shadow: 0 4px 14px var(--ice-glow);
-      font-weight: 700;
     }
 
-    .b.on-ko {
-      background: var(--ko);
-      border-color: transparent;
-      color: #fff;
-      box-shadow: 0 4px 14px var(--ko-glow);
-      font-weight: 700;
+    .btn.dng {
+      color: var(--ko);
+      border-color: rgba(244, 63, 94, 0.3);
+      background: rgba(244, 63, 94, 0.1);
     }
 
-    .b.note {
-      flex: none;
-      padding: 0 14px;
-      font-weight: 500;
-      color: var(--mute);
-      background: transparent;
-    }
-
-    .b.note.has {
-      color: var(--ink);
-      border-color: var(--mute);
-      background: var(--cell);
-    }
-
-    .note-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--ice);
-      display: inline-block;
-      margin-left: 4px;
-    }
-
-    textarea,
-    input[type=text] {
+    input[type=text], textarea {
       width: 100%;
-      border-radius: 10px;
-      border: 1px solid var(--line);
-      background: var(--cell);
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+      background: var(--card);
       color: var(--ink);
-      padding: 10px 12px;
+      padding: 11px 14px;
       font: inherit;
-      font-size: 13.5px;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      font-size: 14px;
+      margin-bottom: 10px;
     }
 
-    textarea:focus,
-    input[type=text]:focus {
+    input[type=text]:focus, textarea:focus {
       outline: none;
       border-color: var(--ice);
       box-shadow: 0 0 0 3px var(--ice-glow);
     }
 
-    textarea {
-      height: 72px;
-      margin-top: 10px;
-      resize: vertical;
-      line-height: 1.4;
-      border-radius: 12px;
-    }
-
-    /* Stats Row */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 22px;
-    }
-
-    .stat-card {
-      background: var(--card);
-      backdrop-filter: var(--glass);
-      -webkit-backdrop-filter: var(--glass);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 14px 10px;
-      text-align: center;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.2s;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-2px);
-    }
-
-    .stat-icon {
-      font-size: 18px;
-      margin-bottom: 2px;
-      display: inline-block;
-    }
-
-    .stat-card b {
-      display: block;
-      font-family: 'Outfit', sans-serif;
-      font-size: 26px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .stat-card.f b {
-      color: var(--ember);
-    }
-
-    .stat-card span {
-      font-size: 11.5px;
-      color: var(--mute);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-top: 3px;
-      display: block;
-    }
-
-    /* Calendar & Heatmap */
-    .section-title {
+    /* Color picker selector in Add Modal */
+    .color-row {
       display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 8px;
+      gap: 8px;
+      margin-bottom: 14px;
+      overflow-x: auto;
+      padding: 4px 0;
     }
 
-    h2 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 19px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      margin: 0;
-    }
-
-    .leg {
-      font-size: 12px;
-      color: var(--mute);
-      line-height: 1.4;
-      margin-bottom: 12px;
-    }
-
-    .calendar-card {
-      background: var(--card);
-      backdrop-filter: var(--glass);
-      -webkit-backdrop-filter: var(--glass);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-card);
-      padding: 16px 14px;
-      margin-bottom: 22px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .calendar-headers {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 5px;
-      margin-bottom: 6px;
-      text-align: center;
-    }
-
-    .cal-head {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--mute);
-      text-transform: uppercase;
-      padding: 2px 0;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 5px;
-    }
-
-    .c {
-      aspect-ratio: 1;
-      border-radius: 8px;
-      border: 1px solid var(--cell-border, transparent);
-      background: var(--cell);
-      padding: 0;
-      font-size: 11.5px;
-      font-weight: 600;
-      font-family: 'Outfit', sans-serif;
-      color: var(--ink);
-      position: relative;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.15s, box-shadow 0.15s;
-    }
-
-    .c:hover {
-      transform: scale(1.12);
-      z-index: 2;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    .c.empty {
-      background: transparent;
-      border-color: transparent;
-      cursor: default;
-      pointer-events: none;
-    }
-
-    .c.fut {
-      opacity: 0.35;
-    }
-
-    .c.sel {
-      outline: 2px solid var(--ice);
-      outline-offset: 1px;
-      box-shadow: 0 0 10px var(--ice-glow);
-      z-index: 3;
-    }
-
-    .c.today:after {
-      content: "";
-      position: absolute;
-      right: 3px;
-      top: 3px;
-      width: 5px;
-      height: 5px;
+    .color-swatch {
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
-      background: var(--ember);
-      box-shadow: 0 0 6px var(--ember);
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform 0.2s;
+      flex-shrink: 0;
     }
 
-    /* Management & Modal Views */
-    #manage, #sync-modal {
-      animation: fadeIn 0.25s ease-out;
+    .color-swatch.selected {
+      border-color: #FFFFFF;
+      transform: scale(1.18);
     }
 
-    .m {
-      display: grid;
-      gap: 10px;
-    }
+    .hide { display: none !important; }
 
-    .manage-h {
-      margin-bottom: 12px;
-    }
-
-    /* Backup & Footer */
-    .bk {
-      margin-top: 26px;
-      border-top: 1px solid var(--line);
-      padding-top: 20px;
-    }
-
-    .bk textarea {
-      font: 11.5px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      height: 80px;
-      margin-bottom: 10px;
-    }
-
-    .row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    #msg {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--ice);
-      margin-top: 10px;
-      min-height: 20px;
-      transition: opacity 0.3s;
-    }
-
-    /* Utility */
-    .hide {
-      display: none !important;
-    }
-
-    /* Confetti Canvas for 100% Celebration */
     #confetti-canvas {
       position: fixed;
-      top: 0;
-      left: 0;
+      inset: 0;
       width: 100vw;
       height: 100vh;
       pointer-events: none;
@@ -893,59 +778,14 @@
     }
 
     @keyframes pulse {
-      0% {
-        transform: scale(0.9);
-        opacity: 0.7;
-      }
-
-      50% {
-        transform: scale(1.3);
-        opacity: 1;
-      }
-
-      100% {
-        transform: scale(0.9);
-        opacity: 0.7;
-      }
+      0% { transform: scale(0.9); opacity: 0.7; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.7; }
     }
 
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(6px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-width: 420px) {
-      main {
-        padding: 14px 12px 36px;
-      }
-
-      .brand-title h1 {
-        font-size: 22px;
-      }
-
-      .score .n {
-        font-size: 44px;
-      }
-
-      .stats div b {
-        font-size: 22px;
-      }
-
-      .quote-content {
-        padding-left: 82px;
-        font-size: 11.5px;
-      }
-
-      .quote-thumb {
-        width: 74px;
-      }
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -954,209 +794,579 @@
   <canvas id="confetti-canvas"></canvas>
 
   <main>
-    <!-- En-tête avec Branding & Actions -->
-    <header class="hd">
-      <div class="brand-wrap">
-        <img src="img/Typographie%20hivernale%20WINTER%20ARC.png" alt="Winter Arc" class="brand-logo" onerror="this.style.display='none'">
-        <div class="brand-title">
-          <h1>WINTER ARC</h1>
-          <p class="sub" id="sub">Chargement du parcours…</p>
-        </div>
+    <!-- Top Header Bar -->
+    <header class="top-bar">
+      <div class="app-title-wrap">
+        <h1 class="app-title">Habits</h1>
+        <span class="app-badge" id="day-badge">Jour 1/86</span>
       </div>
-      <div class="hd-actions">
-        <button class="btn sync-btn" id="sync-btn" aria-label="Synchronisation Cloud" title="Statut de synchronisation Cloud">
-          <span class="sync-dot unconfigured" id="sync-dot"></span>
-          <span class="sync-lbl" id="sync-lbl">Cloud</span>
+      <div class="top-controls">
+        <button class="sync-btn" id="sync-btn" title="Statut de synchronisation Cloud">
+          <span class="sync-dot synced" id="sync-dot"></span>
+          <span id="sync-lbl">Sync</span>
         </button>
-        <button class="btn icon-only" id="theme-btn" aria-label="Changer de thème" title="Basculer thème">🌙</button>
-        <button class="btn" id="mng">⚙️ Gérer</button>
+        <button class="btn-icon" id="theme-btn" title="Thème">🌙</button>
       </div>
     </header>
 
-    <!-- Modal / Vue Synchronisation Cloud Firebase -->
-    <section id="sync-modal" class="hide">
-      <div class="section-title">
-        <h2>Synchronisation Cloud (Firebase)</h2>
-        <button class="btn p" id="sync-close">✓ Fermer</button>
+    <!-- Segmented Control Tabs (Single / Grilles / Stats) -->
+    <nav class="view-tabs">
+      <button class="tab-btn active" id="tab-yearly" data-tab="yearly">
+        <span>㗊</span> Grilles (86j)
+      </button>
+      <button class="tab-btn" id="tab-single" data-tab="single">
+        <span>⊞</span> Quotidien
+      </button>
+      <button class="tab-btn" id="tab-stats" data-tab="stats">
+        <span>🏆</span> Bilan
+      </button>
+    </nav>
+
+    <!-- Overall Summary Banner -->
+    <section class="summary-card">
+      <div class="summary-left">
+        <span class="summary-title" id="summary-headline">Discipline du Jour</span>
+        <span class="summary-sub" id="summary-sub">0 sur 13 habitudes complétées</span>
       </div>
-      <p class="leg">Synchronisez automatiquement vos données entre votre smartphone et votre PC. Fonctionne 100% hors-ligne (envoi automatique dès le retour d'Internet).</p>
-      
-      <div class="h manage-h" style="margin-bottom:14px">
-        <div class="t" style="margin-bottom:4px">1. Code de synchronisation partagé</div>
-        <span class="d" style="margin-bottom:10px">Entrez exactement ce même identifiant sur votre smartphone et sur votre PC pour lier les deux appareils.</span>
-        <input type="text" id="sync-id-input" placeholder="ex: enoch-winter-2026" maxlength="50">
+      <div class="summary-score" id="summary-pct">0%</div>
+    </section>
+
+    <!-- VIEW 1: YEARLY / ALL HABITS HEATMAPS (Matches Screenshot) -->
+    <section id="view-yearly" class="habits-container"></section>
+
+    <!-- VIEW 2: SINGLE / DAILY DETAIL VIEW -->
+    <section id="view-single" class="daily-view hide">
+      <div class="day-selector">
+        <button class="day-btn" id="prev-day">‹</button>
+        <div class="day-info">
+          <div class="day-text" id="cur-day-label">Mercredi 7 octobre</div>
+          <div class="day-sub" id="cur-day-sub">Aujourd'hui</div>
+        </div>
+        <button class="day-btn" id="next-day">›</button>
+      </div>
+      <div id="daily-items-list" class="habits-container"></div>
+    </section>
+
+    <!-- VIEW 3: STATS & BACKUP VIEW -->
+    <section id="view-stats" class="hide">
+      <div class="habit-card" style="margin-bottom:14px">
+        <div class="habit-name" style="margin-bottom:6px">🔥 Statistiques Globales</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center;margin-top:12px">
+          <div><b id="glob-streak" style="font-size:24px;color:var(--ember);display:block">0</b><span style="font-size:12px;color:var(--mute)">Série en cours</span></div>
+          <div><b id="glob-best" style="font-size:24px;color:var(--ice);display:block">0</b><span style="font-size:12px;color:var(--mute)">Record série</span></div>
+          <div><b id="glob-avg" style="font-size:24px;color:var(--ink);display:block">0%</b><span style="font-size:12px;color:var(--mute)">Moyenne</span></div>
+        </div>
       </div>
 
-      <div class="h manage-h" style="margin-bottom:14px">
-        <div class="t" style="margin-bottom:4px">2. Configuration Firebase</div>
-        <span class="d" style="margin-bottom:10px">Collez l'objet de configuration fourni par Firebase Console.</span>
-        <textarea id="sync-cfg-input" style="height:115px;font-family:monospace;font-size:12px" placeholder='{\n  "apiKey": "AIzaSy...",\n  "projectId": "winter-arc-...",\n  "appId": "..."\n}'></textarea>
-      </div>
-
-      <div class="row" style="margin-bottom:12px">
-        <button class="btn p" id="sync-save-btn">☁️ Activer la synchronisation</button>
-        <button class="btn dng" id="sync-disconnect-btn">Déconnecter</button>
-      </div>
-
-      <div id="sync-status-details" class="leg" style="padding:10px;border-radius:10px;background:var(--cell)">
-        Statut : Mode 100% local actif.
+      <div class="habit-card">
+        <div class="habit-name" style="margin-bottom:6px">💾 Sauvegarde & Restauration</div>
+        <p class="habit-desc" style="white-space:normal;margin-bottom:10px">Vos données sont synchronisées automatiquement avec Firebase, mais vous pouvez aussi exporter une copie locale.</p>
+        <textarea id="backup-box" style="height:70px;font-family:monospace;font-size:11px" placeholder="Coller une sauvegarde JSON"></textarea>
+        <div style="display:flex;gap:8px">
+          <button class="btn p" id="backup-copy-btn" style="flex:1">Copier</button>
+          <button class="btn" id="backup-restore-btn" style="flex:1">Restaurer</button>
+        </div>
+        <div id="backup-msg" style="font-size:12px;color:var(--ice);margin-top:8px"></div>
       </div>
     </section>
 
-    <!-- Bannière Stoïcienne Murakami & Illustration Montagne -->
-    <aside class="quote-card" id="quote-card">
-      <img
-        src="img/Everything%20is%20a%20path_%20The%20mountain%20is%20a%20path,%20the%20cloud%20is%20a%20path,the%20silence%20is%20a%20path.__%E2%80%94%20Haruki%20Murakami.__%E2%80%94%20Haruki%20Murakami.__%E2%80%94%20Haruki%20Murakami"
-        alt="Montagne" class="quote-thumb" onerror="this.style.display='none'">
-      <div class="quote-content">
-        « Tout est un chemin : la montagne est un chemin, le nuage est un chemin, le silence est un chemin. »
-        <span class="quote-author">— Haruki Murakami</span>
-      </div>
-    </aside>
+    <!-- Floating Action Button (+) -->
+    <button class="fab-add" id="fab-add" title="Ajouter une habitude">+</button>
 
-    <!-- Vue Gestion des Habitudes -->
-    <section id="manage" class="hide">
-      <div class="section-title">
-        <h2>Gérer les habitudes</h2>
-        <button class="btn p" id="done">✓ Terminé</button>
-      </div>
-      <p class="leg">Modifie le nom, affine la description ou supprime une habitude. Tout est sauvegardé automatiquement.</p>
-      <ul id="mlist" class="habit-list"></ul>
-      
-      <div class="h manage-h">
-        <div class="t" style="margin-bottom:8px">Nouvelle habitude</div>
-        <div class="m">
-          <input type="text" id="newn" placeholder="Nom de la nouvelle habitude (ex. Méditation 10 min)" maxlength="60">
-          <input type="text" id="newd" placeholder="Description ou règle d'or (facultatif)" maxlength="90">
-          <button class="btn p" id="add">+ Ajouter au Winter Arc</button>
+    <!-- MODAL: AJOUTER / GÉRER UNE HABITUDE -->
+    <div class="modal-overlay hide" id="add-modal">
+      <div class="modal-sheet">
+        <div class="modal-head">
+          <h2>Nouvelle Habitude</h2>
+          <button class="btn-icon" id="add-modal-close">✕</button>
         </div>
-      </div>
-    </section>
+        <input type="text" id="new-h-name" placeholder="Nom de l'habitude (ex. Workout 45m)" maxlength="50">
+        <input type="text" id="new-h-desc" placeholder="Règle ou description (facultatif)" maxlength="80">
+        
+        <label style="font-size:12px;color:var(--mute);display:block;margin-bottom:6px">Couleur d'accentuation :</label>
+        <div class="color-row" id="color-picker-row"></div>
 
-    <!-- Vue Suivi Journalier (Tracking) -->
-    <section id="track">
-      <!-- Navigateur de jour -->
-      <div class="day">
-        <button class="day-btn" id="prev" aria-label="Jour précédent">‹</button>
-        <div class="day-center">
-          <div class="day-title" id="dlabel">Aujourd'hui</div>
-          <div class="day-badge-wrap">
-            <span class="day-badge" id="dsub">Aujourd'hui</span>
-            <button id="today-btn" class="jump-today hide">Revenir à aujourd'hui</button>
-          </div>
-        </div>
-        <button class="day-btn" id="next" aria-label="Jour suivant">›</button>
+        <button class="btn p" id="save-new-h-btn" style="width:100%;margin-top:10px">+ Créer l'habitude</button>
       </div>
+    </div>
 
-      <!-- Carte de score -->
-      <div class="score">
-        <div class="top">
-          <div class="n"><span id="sc">0</span><small>/ 100</small></div>
-          <div class="score-meta">
-            <div id="cnt" class="score-counts">0 / 0 validées</div>
-            <div class="score-desc" id="score-desc">Régularité & discipline</div>
-          </div>
+    <!-- MODAL: CLOUD SYNC FIREBASE -->
+    <div class="modal-overlay hide" id="sync-modal">
+      <div class="modal-sheet">
+        <div class="modal-head">
+          <h2>☁️ Synchronisation Cloud</h2>
+          <button class="btn-icon" id="sync-modal-close">✕</button>
         </div>
-        <div class="bar"><i id="fill"></i></div>
-      </div>
+        <p class="habit-desc" style="white-space:normal;margin-bottom:12px">Vos données se synchronisent automatiquement en temps réel entre votre smartphone et votre PC. Fonctionne 100% hors-ligne.</p>
+        
+        <label style="font-size:12px;color:var(--mute);display:block;margin-bottom:4px">Code partagé (identique sur tous vos appareils) :</label>
+        <input type="text" id="sync-id-input" value="enoch-winter-2026">
 
-      <!-- Liste des Habitudes du jour -->
-      <ul id="list" class="habit-list"></ul>
+        <div id="sync-status-text" style="font-size:12.5px;padding:10px;border-radius:12px;background:var(--card);margin-bottom:14px;border:1px solid var(--card-border)">
+          🟢 Connecté au projet Google Firebase : <b>projet-arc-92b16</b>
+        </div>
 
-      <!-- Statistiques globales -->
-      <div class="stats">
-        <div class="stat-card f">
-          <span class="stat-icon">🔥</span>
-          <b id="st1">0</b>
-          <span>Série active</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-icon">🏆</span>
-          <b id="st2">0</b>
-          <span>Record</span>
-        </div>
-        <div class="stat-card">
-          <span class="stat-icon">🎯</span>
-          <b id="st3">0%</b>
-          <span>Moyenne</span>
-        </div>
+        <button class="btn p" id="sync-force-btn" style="width:100%">Forcer la synchronisation</button>
       </div>
-
-      <!-- Calendrier / Parcours Heatmap -->
-      <div class="section-title">
-        <h2>Ton parcours</h2>
-        <span class="leg" style="margin:0">Série = score ≥ 80%</span>
-      </div>
-      <div class="calendar-card">
-        <div class="calendar-headers">
-          <span class="cal-head">Lun</span>
-          <span class="cal-head">Mar</span>
-          <span class="cal-head">Mer</span>
-          <span class="cal-head">Jeu</span>
-          <span class="cal-head">Ven</span>
-          <span class="cal-head">Sam</span>
-          <span class="cal-head">Dim</span>
-        </div>
-        <div class="grid" id="grid"></div>
-      </div>
-    </section>
-
-    <!-- Section Sauvegarde & Restauration -->
-    <section class="bk">
-      <div class="section-title">
-        <h2>Sauvegarde locale</h2>
-        <span class="leg" style="margin:0">Stockage dans ce navigateur</span>
-      </div>
-      <textarea id="box" placeholder="Colle ici une sauvegarde JSON pour restaurer tes données"></textarea>
-      <div class="row">
-        <button class="btn p" id="copy">📋 Copier la sauvegarde</button>
-        <button class="btn" id="imp">📥 Restaurer</button>
-      </div>
-      <div id="msg"></div>
-    </section>
+    </div>
   </main>
 
   <script type="module">
-    const DEF = [
-      ["Discipline sexuelle", "Zéro pulsion suivie, attention protégée"],
-      ["Réveil avant 6h00", "Le calme du matin pour toi"],
-      ["Gagner les 90 premières minutes", "Créer avant de consommer"],
-      ["Bouger son corps", "Une activité physique, peu importe laquelle"],
-      ["Compétence à haute valeur", "Code, vente… ta pratique du jour"],
-      ["Gagner son divertissement", "Tâche difficile avant de jouer ou scroller"],
-      ["Douche froide", "Exposition volontaire à l'inconfort"],
-      ["Manger pour construire", "Protéines et légumes avant le confort"],
-      ["Lire 10 pages", "Nourrir l'esprit à la place du scroll"],
-      ["Espace propre", "10 minutes de rangement le soir"],
-      ["Temps avec Dieu", "Prière, méditation et gratitude"],
-      ["Suivre ses habitudes", "Remplir cette page chaque jour"],
-      ["Protéger son sommeil", "7 à 8 heures réparatrices"]
+    /* ========================================================
+       CONFIGURATIONS & PALETTES
+       ======================================================== */
+    const DEFAULT_FIREBASE_CONFIG = {
+      apiKey: "AIzaSyDXAqZ9MFH37BKdYKs5fTl5JK5tOKGzBXs",
+      authDomain: "projet-arc-92b16.firebaseapp.com",
+      projectId: "projet-arc-92b16",
+      storageBucket: "projet-arc-92b16.firebasestorage.app",
+      messagingSenderId: "63100339515",
+      appId: "1:63100339515:web:289be3d02da210d47ba31e"
+    };
+
+    const PALETTE = [
+      "#38BDF8", "#8B5CF6", "#10B981", "#FB923C", 
+      "#F43F5E", "#EC4899", "#EAB308", "#06B6D4", 
+      "#6366F1", "#84CC16", "#14B8A6", "#A855F7"
     ];
 
-    const K2 = "winterarc2026v2", K1 = "winterarc2026", THEME_KEY = "winterarc_theme";
-    const FIREBASE_CFG_KEY = "winterarc_firebase_cfg", SYNC_ID_KEY = "winterarc_sync_id";
-    
-    // Heure calée à 12h00 pour éviter tout décalage d'heure lors du changement d'heure d'hiver fin octobre
-    const START = new Date(2026, 9, 7, 12, 0, 0);
-    const END = new Date(2026, 11, 31, 12, 0, 0);
+    const DEF_HABITS = [
+      { id: "h0", n: "Discipline sexuelle", d: "Zéro pulsion suivie, attention protégée", icon: "🛡️", color: "#8B5CF6" },
+      { id: "h1", n: "Réveil avant 6h00", d: "Le calme du matin pour toi", icon: "🌅", color: "#F59E0B" },
+      { id: "h2", n: "Gagner les 90 premières minutes", d: "Créer avant de consommer", icon: "⚡", color: "#06B6D4" },
+      { id: "h3", n: "Bouger son corps", d: "Une activité physique régulière", icon: "🏃", color: "#10B981" },
+      { id: "h4", n: "Compétence à haute valeur", d: "Code, vente… pratique quotidienne", icon: "💻", color: "#6366F1" },
+      { id: "h5", n: "Gagner son divertissement", d: "Tâche difficile avant de scroller", icon: "🎮", color: "#F97316" },
+      { id: "h6", n: "Douche froide", d: "Exposition volontaire à l'inconfort", icon: "❄️", color: "#38BDF8" },
+      { id: "h7", n: "Manger pour construire", d: "Protéines et légumes avant confort", icon: "🥗", color: "#84CC16" },
+      { id: "h8", n: "Lire 10 pages", d: "Nourrir l'esprit chaque jour", icon: "📚", color: "#EC4899" },
+      { id: "h9", n: "Espace propre", d: "10 minutes de rangement le soir", icon: "🧹", color: "#14B8A6" },
+      { id: "h10", n: "Temps avec Dieu", d: "Prière, méditation et gratitude", icon: "🙏", color: "#EAB308" },
+      { id: "h11", n: "Suivre ses habitudes", d: "Remplir ce tracker quotidiennement", icon: "📝", color: "#3B82F6" },
+      { id: "h12", n: "Protéger son sommeil", d: "7 à 8 heures réparatrices", icon: "🌙", color: "#A855F7" }
+    ];
+
+    const K2 = "winterarc2026v2", THEME_KEY = "winterarc_theme", SYNC_ID_KEY = "winterarc_sync_id";
+    const START = new Date(2026, 9, 7, 12, 0, 0); // 7 Octobre 2026
+    const END = new Date(2026, 11, 31, 12, 0, 0); // 31 Décembre 2026
     const pad = n => String(n).padStart(2, "0");
     const key = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 
+    // Génération des 86 jours
     const DAYS = [];
     for (let d = new Date(START); d <= END; d.setDate(d.getDate() + 1)) {
       DAYS.push(new Date(d));
     }
     const KEYS = DAYS.map(key);
 
+    // Découpage en 13 semaines (colonnes) pour les grilles
+    const getDow = d => (d.getDay() + 6) % 7; // Lun=0 à Dim=6
+    const WEEKS = [];
+    let curWeek = new Array(7).fill(null);
+    DAYS.forEach(d => {
+      const dow = getDow(d);
+      if (dow === 0 && curWeek.some(x => x !== null)) {
+        WEEKS.push(curWeek);
+        curWeek = new Array(7).fill(null);
+      }
+      curWeek[dow] = d;
+    });
+    if (curWeek.some(x => x !== null)) WEEKS.push(curWeek);
+
     const now = new Date();
     let ti = KEYS.indexOf(key(now));
     if (ti < 0) ti = now < START ? 0 : KEYS.length - 1;
-    let sel = ti, S = null, OPEN = new Set(), pend = null;
+    let sel = ti;
+    let S = null;
+    let activeTab = "yearly";
+    let selectedColor = PALETTE[0];
 
     const $ = id => document.getElementById(id);
     const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
-    /* Gestion du Thème */
+    /* Chargement initial LocalStorage */
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(K2);
+        if (raw) {
+          const o = JSON.parse(raw);
+          if (o && Array.isArray(o.habits)) {
+            // Assurer que chaque habitude possède une couleur et un icône
+            o.habits.forEach((h, i) => {
+              if (!h.color) h.color = PALETTE[i % PALETTE.length];
+              if (!h.icon) h.icon = "⚡";
+            });
+            return o;
+          }
+        }
+      } catch (e) { }
+      return { habits: DEF_HABITS, log: {}, updatedAt: Date.now() };
+    }
+    S = loadState();
+
+    function saveLocal() {
+      try {
+        S.updatedAt = Date.now();
+        localStorage.setItem(K2, JSON.stringify(S));
+      } catch (e) { }
+    }
+
+    function save() {
+      saveLocal();
+      pushToCloud();
+    }
+
+    const ent = (k, id) => (S.log[k] && S.log[k][id]) || {};
+    const countOk = k => S.habits.filter(h => ent(k, h.id).s === "ok").length;
+    const dayScore = k => S.habits.length ? Math.round((countOk(k) / S.habits.length) * 100) : 0;
+
+    function toggleHabit(dateKey, habitId) {
+      S.log[dateKey] = S.log[dateKey] || {};
+      const current = S.log[dateKey][habitId] ? S.log[dateKey][habitId].s : null;
+      const next = current === "ok" ? null : "ok";
+      
+      if (!S.log[dateKey][habitId]) S.log[dateKey][habitId] = {};
+      if (next) S.log[dateKey][habitId].s = next;
+      else delete S.log[dateKey][habitId].s;
+
+      if (!S.log[dateKey][habitId].s && !S.log[dateKey][habitId].c) {
+        delete S.log[dateKey][habitId];
+      }
+      save();
+
+      // Vérifier si journée à 100%
+      if (next === "ok" && dayScore(dateKey) === 100) {
+        launchCelebration();
+      }
+      render();
+    }
+
+    /* Calcul de série (streak) d'une habitude spécifique */
+    function getHabitStreak(habitId) {
+      let streak = 0;
+      let i = ti;
+      // Si non validé aujourd'hui, vérifier à partir d'hier
+      if (ent(KEYS[i], habitId).s !== "ok") i--;
+      while (i >= 0 && ent(KEYS[i], habitId).s === "ok") {
+        streak++;
+        i--;
+      }
+      return streak;
+    }
+
+    function getHabitTotalDays(habitId) {
+      let count = 0;
+      for (let j = 0; j <= ti; j++) {
+        if (ent(KEYS[j], habitId).s === "ok") count++;
+      }
+      return count;
+    }
+
+    /* ========================================================
+       RENDU DES VUES (YEARLY GRILLES, DAILY, STATS)
+       ======================================================== */
+    function render() {
+      // 1. Barre de résumé
+      const todayKey = KEYS[ti];
+      const todayOk = countOk(todayKey);
+      const totalH = S.habits.length;
+      const pct = dayScore(todayKey);
+
+      $("day-badge").textContent = `Jour ${ti + 1}/86`;
+      $("summary-headline").textContent = pct === 100 ? "Journée Parfaite ! 🔥" : "Discipline du Jour";
+      $("summary-sub").textContent = `${todayOk} sur ${totalH} complétée${todayOk > 1 ? "s" : ""}`;
+      $("summary-pct").textContent = `${pct}%`;
+
+      // 2. Vue Grilles (Annuelle / Screenshot)
+      renderYearlyView();
+
+      // 3. Vue Quotidienne (Single)
+      renderDailyView();
+
+      // 4. Vue Stats
+      renderStatsView();
+    }
+
+    function renderYearlyView() {
+      const container = $("view-yearly");
+      const todayKey = KEYS[ti];
+
+      container.innerHTML = S.habits.map(h => {
+        const isDoneToday = ent(todayKey, h.id).s === "ok";
+        const streak = getHabitStreak(h.id);
+        const total = getHabitTotalDays(h.id);
+        const glow = h.color + "55";
+
+        // Génération des 13 colonnes x 7 lignes du heatmap
+        let dotsHtml = "";
+        for (let col = 0; col < WEEKS.length; col++) {
+          for (let row = 0; row < 7; row++) {
+            const dateObj = WEEKS[col][row];
+            if (!dateObj) {
+              dotsHtml += `<div class="dot empty-slot"></div>`;
+            } else {
+              const dKey = key(dateObj);
+              const dIndex = KEYS.indexOf(dKey);
+              const entry = ent(dKey, h.id);
+              const isOk = entry.s === "ok";
+              const isKo = entry.s === "ko";
+              const isT = dIndex === ti;
+              const isFut = dIndex > ti;
+
+              let dotClass = "dot";
+              if (isOk) dotClass += " active";
+              else if (isKo) dotClass += " ko";
+              if (isFut) dotClass += " fut";
+              if (isT) dotClass += " today";
+
+              const dateLabel = dateObj.toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+              const titleText = `${dateLabel} : ${isOk ? "Validé ✓" : (isKo ? "Échoué ✕" : "Non validé")}`;
+
+              dotsHtml += `
+                <div class="${dotClass}" 
+                  data-k="${dKey}" 
+                  data-id="${h.id}" 
+                  title="${titleText}">
+                </div>
+              `;
+            }
+          }
+        }
+
+        return `
+          <div class="habit-card" style="--h-color:${h.color};--h-glow:${glow}">
+            <div class="habit-head">
+              <div class="habit-left">
+                <div class="habit-icon">${h.icon || "⚡"}</div>
+                <div class="habit-details">
+                  <div class="habit-name">${esc(h.n)}</div>
+                  ${h.d ? `<div class="habit-desc">${esc(h.d)}</div>` : ""}
+                </div>
+              </div>
+              <div class="habit-right">
+                <span class="habit-streak">🔥 ${streak}</span>
+                <span class="habit-total">${total}d</span>
+                <button class="habit-check-btn${isDoneToday ? " checked" : ""}" 
+                  data-act="toggle-today" 
+                  data-id="${h.id}"
+                  title="Valider aujourd'hui">
+                  ${isDoneToday ? "✓" : ""}
+                </button>
+              </div>
+            </div>
+
+            <div class="heatmap-wrap">
+              <div class="heatmap-months">
+                <span class="m-label-oct">Oct</span>
+                <span class="m-label-nov">Nov</span>
+                <span class="m-label-dec">Déc</span>
+              </div>
+              <div class="heatmap-grid">
+                ${dotsHtml}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderDailyView() {
+      const selKey = KEYS[sel];
+      const selDate = DAYS[sel];
+      $("cur-day-label").textContent = selDate.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
+      $("cur-day-sub").textContent = sel === ti ? "Aujourd'hui" : (sel < ti ? "Jour passé" : "À venir");
+      $("prev-day").disabled = sel === 0;
+      $("next-day").disabled = sel === KEYS.length - 1;
+
+      $("daily-items-list").innerHTML = S.habits.map(h => {
+        const e = ent(selKey, h.id);
+        const glow = h.color + "55";
+        return `
+          <div class="daily-habit-item" style="--h-color:${h.color};--h-glow:${glow}">
+            <div class="daily-item-row">
+              <div class="habit-left">
+                <div class="habit-icon">${h.icon || "⚡"}</div>
+                <div class="habit-details">
+                  <div class="habit-name">${esc(h.n)}</div>
+                  ${h.d ? `<div class="habit-desc">${esc(h.d)}</div>` : ""}
+                </div>
+              </div>
+              <div class="daily-acts">
+                <button class="btn-act${e.s === "ok" ? " on-ok" : ""}" data-da="ok" data-id="${h.id}">✓ Validé</button>
+                <button class="btn-act${e.s === "ko" ? " on-ko" : ""}" data-da="ko" data-id="${h.id}">✕</button>
+                <button class="btn-act note-btn${e.c ? " has" : ""}" data-da="note" data-id="${h.id}">Note</button>
+              </div>
+            </div>
+            ${e.showNote || e.c ? `
+              <textarea class="note-box" data-id="${h.id}" placeholder="Note / Réflexion du jour...">${esc(e.c || "")}</textarea>
+            ` : ""}
+          </div>
+        `;
+      }).join("");
+    }
+
+    function renderStatsView() {
+      let s = 0, i = ti;
+      if (dayScore(KEYS[i]) < 80) i--;
+      while (i >= 0 && dayScore(KEYS[i]) >= 80) { s++; i--; }
+
+      let best = 0, run = 0, sum = 0;
+      for (let j = 0; j <= ti; j++) {
+        const v = dayScore(KEYS[j]);
+        sum += v;
+        if (v >= 80) { run++; best = Math.max(best, run); }
+        else run = 0;
+      }
+      $("glob-streak").textContent = s;
+      $("glob-best").textContent = best;
+      $("glob-avg").textContent = Math.round(sum / (ti + 1)) + "%";
+    }
+
+    /* ========================================================
+       ÉVÉNEMENTS & INTERACTIONS
+       ======================================================== */
+    // Bascule des onglets
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeTab = btn.dataset.tab;
+        $("view-yearly").classList.toggle("hide", activeTab !== "yearly");
+        $("view-single").classList.toggle("hide", activeTab !== "single");
+        $("view-stats").classList.toggle("hide", activeTab !== "stats");
+        render();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      };
+    });
+
+    // Clics dans la vue Grilles (Validation rapide aujourd'hui OU clic sur un point du calendrier)
+    $("view-yearly").onclick = e => {
+      const todayBtn = e.target.closest("[data-act='toggle-today']");
+      if (todayBtn) {
+        toggleHabit(KEYS[ti], todayBtn.dataset.id);
+        return;
+      }
+
+      const dot = e.target.closest(".dot[data-k]");
+      if (dot) {
+        toggleHabit(dot.dataset.k, dot.dataset.id);
+      }
+    };
+
+    // Navigation de jour dans la vue Single
+    $("prev-day").onclick = () => { if (sel > 0) { sel--; render(); } };
+    $("next-day").onclick = () => { if (sel < KEYS.length - 1) { sel++; render(); } };
+
+    $("view-single").onclick = e => {
+      const b = e.target.closest("[data-da]");
+      if (!b) return;
+      const id = b.dataset.id, a = b.dataset.da, k = KEYS[sel];
+      S.log[k] = S.log[k] || {};
+      S.log[k][id] = S.log[k][id] || {};
+
+      if (a === "note") {
+        S.log[k][id].showNote = !S.log[k][id].showNote;
+      } else {
+        const cur = S.log[k][id].s;
+        S.log[k][id].s = cur === a ? null : a;
+        if (!S.log[k][id].s && !S.log[k][id].c) delete S.log[k][id];
+        save();
+        if (a === "ok" && dayScore(k) === 100) launchCelebration();
+      }
+      render();
+    };
+
+    $("view-single").oninput = e => {
+      if (e.target.tagName !== "TEXTAREA") return;
+      const id = e.target.dataset.id, k = KEYS[sel];
+      S.log[k] = S.log[k] || {};
+      S.log[k][id] = S.log[k][id] || {};
+      S.log[k][id].c = e.target.value;
+      save();
+    };
+
+    // Modal Ajout d'habitude (Bouton FAB +)
+    function initColorPicker() {
+      const row = $("color-picker-row");
+      row.innerHTML = PALETTE.map((c, i) => `
+        <div class="color-swatch${i === 0 ? " selected" : ""}" style="background:${c}" data-c="${c}"></div>
+      `).join("");
+      row.onclick = e => {
+        const sw = e.target.closest(".color-swatch");
+        if (!sw) return;
+        document.querySelectorAll(".color-swatch").forEach(s => s.classList.remove("selected"));
+        sw.classList.add("selected");
+        selectedColor = sw.dataset.c;
+      };
+    }
+    initColorPicker();
+
+    $("fab-add").onclick = () => {
+      $("new-h-name").value = "";
+      $("new-h-desc").value = "";
+      $("add-modal").classList.remove("hide");
+      $("new-h-name").focus();
+    };
+
+    $("add-modal-close").onclick = () => $("add-modal").classList.add("hide");
+
+    $("save-new-h-btn").onclick = () => {
+      const n = $("new-h-name").value.trim();
+      if (!n) { $("new-h-name").focus(); return; }
+      const d = $("new-h-desc").value.trim();
+      const icons = ["🔥", "⚡", "🎯", "💪", "💡", "🚀", "📖", "🧘", "🏆", "🌟"];
+      const randIcon = icons[Math.floor(Math.random() * icons.length)];
+
+      S.habits.push({
+        id: "h" + Date.now().toString(36),
+        n,
+        d,
+        icon: randIcon,
+        color: selectedColor
+      });
+      save();
+      $("add-modal").classList.add("hide");
+      render();
+    };
+
+    // Modal Cloud Sync
+    $("sync-btn").onclick = () => $("sync-modal").classList.remove("hide");
+    $("sync-modal-close").onclick = () => $("sync-modal").classList.add("hide");
+    $("sync-force-btn").onclick = async () => {
+      const sid = $("sync-id-input").value.trim() || "enoch-winter-2026";
+      localStorage.setItem(SYNC_ID_KEY, sid);
+      await pushToCloud();
+      $("sync-modal").classList.add("hide");
+    };
+
+    // Sauvegarde & Restauration
+    $("backup-copy-btn").onclick = async () => {
+      const t = JSON.stringify(S);
+      $("backup-box").value = t;
+      try {
+        await navigator.clipboard.writeText(t);
+        $("backup-msg").textContent = "✓ Copié dans le presse-papier !";
+      } catch (e) {
+        $("backup-msg").textContent = "Copie le texte dans le cadre.";
+      }
+      setTimeout(() => { $("backup-msg").textContent = ""; }, 3500);
+    };
+
+    $("backup-restore-btn").onclick = () => {
+      try {
+        const o = JSON.parse($("backup-box").value);
+        if (!o || !Array.isArray(o.habits) || typeof o.log !== "object") throw 0;
+        S = o;
+        save();
+        render();
+        $("backup-msg").textContent = "✓ Sauvegarde restaurée !";
+      } catch (e) {
+        $("backup-msg").textContent = "⚠️ Données JSON invalides.";
+      }
+      setTimeout(() => { $("backup-msg").textContent = ""; }, 3500);
+    };
+
+    // Thème (Clair / Sombre)
     function initTheme() {
       const saved = localStorage.getItem(THEME_KEY);
       const isDark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -1172,105 +1382,29 @@
       setTheme(cur === "dark" ? "light" : "dark");
     };
 
-    /* Chargement et migration */
-    function load() {
-      try {
-        const r = localStorage.getItem(K2);
-        if (r) {
-          const o = JSON.parse(r);
-          if (o && Array.isArray(o.habits)) return o;
-        }
-      } catch (e) { }
-
-      const s = { habits: DEF.map((h, i) => ({ id: "h" + i, n: h[0], d: h[1] })), log: {}, updatedAt: Date.now() };
-      try {
-        const r = localStorage.getItem(K1);
-        if (r) {
-          const o = JSON.parse(r);
-          for (const k in o) {
-            s.log[k] = {};
-            (o[k] || []).forEach(i => { s.log[k]["h" + i] = { s: "ok" }; });
-          }
-        }
-      } catch (e) { }
-      return s;
-    }
-    S = load();
-
-    const saveLocal = () => {
-      try { 
-        S.updatedAt = Date.now();
-        localStorage.setItem(K2, JSON.stringify(S)); 
-      } catch (e) { }
-    };
-
-    const save = () => {
-      saveLocal();
-      pushToCloud();
-    };
-
-    const ent = (k, id) => (S.log[k] && S.log[k][id]) || {};
-    const count = (k, st) => S.habits.filter(h => ent(k, h.id).s === st).length;
-    const score = k => S.habits.length ? Math.round((count(k, "ok") / S.habits.length) * 100) : 0;
-
-    function setEntry(k, id, f) {
-      S.log[k] = S.log[k] || {};
-      const e = Object.assign({}, S.log[k][id]);
-      f(e);
-      if (!e.s) delete e.s;
-      if (!e.c) delete e.c;
-      if (e.s || e.c) S.log[k][id] = e;
-      else delete S.log[k][id];
-    }
-
-    /* Statistiques */
-    function stats() {
-      let s = 0, i = ti;
-      if (score(KEYS[i]) < 80) i--;
-      while (i >= 0 && score(KEYS[i]) >= 80) { s++; i--; }
-
-      let best = 0, run = 0, sum = 0;
-      for (let j = 0; j <= ti; j++) {
-        const v = score(KEYS[j]);
-        sum += v;
-        if (v >= 80) { run++; best = Math.max(best, run); }
-        else run = 0;
-      }
-      $("st1").textContent = s;
-      $("st2").textContent = best;
-      $("st3").textContent = Math.round(sum / (ti + 1)) + "%";
-    }
-
-    /* Célébration Confetti */
+    // Confetti
     function launchCelebration() {
       const canvas = $("confetti-canvas");
       const ctx = canvas.getContext("2d");
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-
       const particles = [];
-      const colors = ["#38BDF8", "#0284C7", "#FB923C", "#E0F2FE", "#FFFFFF"];
-      for (let i = 0; i < 60; i++) {
+      for (let i = 0; i < 70; i++) {
         particles.push({
-          x: canvas.width / 2 + (Math.random() - 0.5) * 100,
+          x: canvas.width / 2 + (Math.random() - 0.5) * 120,
           y: canvas.height * 0.35,
-          vx: (Math.random() - 0.5) * 9,
-          vy: (Math.random() - 1.2) * 8,
+          vx: (Math.random() - 0.5) * 10,
+          vy: (Math.random() - 1.2) * 9,
           size: Math.random() * 5 + 3,
-          color: colors[Math.floor(Math.random() * colors.length)],
+          color: PALETTE[Math.floor(Math.random() * PALETTE.length)],
           alpha: 1
         });
       }
-
-      let frames = 0;
       function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         let alive = false;
         particles.forEach(p => {
-          p.x += p.vx;
-          p.y += p.vy;
-          p.vy += 0.2;
-          p.alpha -= 0.016;
+          p.x += p.vx; p.y += p.vy; p.vy += 0.22; p.alpha -= 0.015;
           if (p.alpha > 0) {
             alive = true;
             ctx.globalAlpha = p.alpha;
@@ -1280,105 +1414,14 @@
             ctx.fill();
           }
         });
-        frames++;
-        if (alive && frames < 75) requestAnimationFrame(animate);
+        if (alive) requestAnimationFrame(animate);
         else ctx.clearRect(0, 0, canvas.width, canvas.height);
       }
       animate();
     }
 
-    /* Rendu Principal */
-    function render() {
-      const k = KEYS[sel], d = DAYS[sel], N = S.habits.length;
-      const currentScore = score(k);
-      const okCount = count(k, "ok");
-      const koCount = count(k, "ko");
-
-      $("sub").textContent = `Jour ${ti + 1} sur ${KEYS.length} · Jusqu'au 31 décembre`;
-      $("dlabel").textContent = d.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
-
-      const isToday = sel === ti;
-      $("dsub").className = `day-badge${isToday ? " today" : ""}`;
-      $("dsub").textContent = isToday ? "Aujourd'hui" : (sel < ti ? "Jour passé" : "À venir");
-      $("today-btn").classList.toggle("hide", isToday);
-
-      $("prev").disabled = sel === 0;
-      $("next").disabled = sel === KEYS.length - 1;
-
-      $("sc").textContent = currentScore;
-      $("cnt").textContent = `${okCount} validée${okCount > 1 ? "s" : ""} sur ${N}`;
-      $("score-desc").textContent = currentScore === 100 ? "Journée parfaite ! 🔥" : (koCount > 0 ? `${koCount} échouée${koCount > 1 ? "s" : ""}` : "Discipline en cours");
-      $("fill").style.width = currentScore + "%";
-
-      // Liste des habitudes
-      $("list").innerHTML = N ? S.habits.map(h => {
-        const e = ent(k, h.id), open = OPEN.has(h.id) || e.c;
-        return `
-      <li class="h ${e.s || ""}">
-        <div class="h-info">
-          <div class="t">${esc(h.n)}</div>
-          ${h.d ? `<span class="d">${esc(h.d)}</span>` : ""}
-        </div>
-        <div class="acts">
-          <button class="b${e.s === "ok" ? " on-ok" : ""}" data-a="ok" data-id="${h.id}" aria-pressed="${e.s === "ok"}">
-            ${e.s === "ok" ? "✓ Validé" : "Valider"}
-          </button>
-          <button class="b${e.s === "ko" ? " on-ko" : ""}" data-a="ko" data-id="${h.id}" aria-pressed="${e.s === "ko"}">
-            ${e.s === "ko" ? "✕ Échoué" : "Échoué"}
-          </button>
-          <button class="b note${e.c ? " has" : ""}" data-a="note" data-id="${h.id}" aria-label="Commentaire">
-            Note ${e.c ? '<span class="note-dot"></span>' : ""}
-          </button>
-        </div>
-        ${open ? `<textarea data-id="${h.id}" placeholder="Note du jour : réflexions, obstacles, victoire…">${esc(e.c || "")}</textarea>` : ""}
-      </li>
-    `;
-      }).join("") : '<li class="leg">Aucune habitude active. Clique sur « Gérer » pour en configurer.</li>';
-
-      // Grille / Heatmap alignée Lun-Dim
-      const firstDayWeekIndex = (DAYS[0].getDay() + 6) % 7;
-      let gridHtml = "";
-      for (let p = 0; p < firstDayWeekIndex; p++) {
-        gridHtml += '<div class="c empty"></div>';
-      }
-      gridHtml += KEYS.map((kk, j) => {
-        const v = score(kk);
-        const isDark = document.documentElement.getAttribute("data-theme") !== "light";
-        let bgStyle = "";
-        if (v > 0) {
-          const baseCell = isDark ? "rgba(16, 30, 46, 1)" : "rgba(226, 236, 242, 1)";
-          bgStyle = `background: color-mix(in srgb, var(--ice) ${Math.max(22, v)}%, ${baseCell});`;
-        }
-        return `
-      <button class="c${j === sel ? " sel" : ""}${j === ti ? " today" : ""}${j > ti ? " fut" : ""}" 
-        data-j="${j}" 
-        style="${bgStyle}" 
-        title="${DAYS[j].toLocaleDateString("fr-FR", { day: "numeric", month: "long" })} : ${v}%"
-        aria-label="${DAYS[j].toLocaleDateString("fr-FR", { day: "numeric", month: "long" })}, ${v} sur 100">
-        ${DAYS[j].getDate()}
-      </button>
-    `;
-      }).join("");
-      $("grid").innerHTML = gridHtml;
-
-      stats();
-    }
-
-    /* Rendu Gestion des habitudes */
-    function renderManage() {
-      $("mlist").innerHTML = S.habits.map(h => `
-    <li class="h">
-      <div class="m">
-        <input type="text" data-id="${h.id}" data-f="n" value="${esc(h.n)}" maxlength="60" aria-label="Nom" placeholder="Nom de l'habitude">
-        <input type="text" data-id="${h.id}" data-f="d" value="${esc(h.d || "")}" maxlength="90" placeholder="Description ou règle" aria-label="Description">
-        <button class="btn dng" data-del="${h.id}">${pend === h.id ? "Confirmer la suppression" : "Supprimer"}</button>
-      </div>
-    </li>
-  `).join("");
-    }
-
     /* ========================================================
-       MOTEUR DE SYNCHRONISATION FIREBASE (OFFLINE-FIRST)
+       FIREBASE FIRESTORE SYNC (OFFLINE-FIRST)
        ======================================================== */
     let db = null;
     let syncUnsub = null;
@@ -1399,11 +1442,8 @@
       };
       if (remote.log) {
         for (const dateKey in remote.log) {
-          if (!merged.log[dateKey]) {
-            merged.log[dateKey] = remote.log[dateKey];
-          } else {
-            merged.log[dateKey] = Object.assign({}, merged.log[dateKey], remote.log[dateKey]);
-          }
+          if (!merged.log[dateKey]) merged.log[dateKey] = remote.log[dateKey];
+          else merged.log[dateKey] = Object.assign({}, merged.log[dateKey], remote.log[dateKey]);
         }
       }
       return merged;
@@ -1421,42 +1461,13 @@
           updatedAt: S.updatedAt || Date.now()
         }, { merge: true });
       } catch (e) {
-        console.warn("Mise en file d'attente locale Firestore (hors-ligne ou réseau instable) :", e);
+        console.warn("Écriture dans le cache local Firestore (hors-ligne) :", e);
       }
     }
 
-    const DEFAULT_FIREBASE_CONFIG = {
-      apiKey: "AIzaSyDXAqZ9MFH37BKdYKs5fTl5JK5tOKGzBXs",
-      authDomain: "projet-arc-92b16.firebaseapp.com",
-      projectId: "projet-arc-92b16",
-      storageBucket: "projet-arc-92b16.firebasestorage.app",
-      messagingSenderId: "63100339515",
-      appId: "1:63100339515:web:289be3d02da210d47ba31e"
-    };
-
     async function initFirebase() {
-      const storedCfg = localStorage.getItem(FIREBASE_CFG_KEY);
-      const syncId = localStorage.getItem(SYNC_ID_KEY) || "enoch-winter-2026";
-      $("sync-id-input").value = syncId;
-
-      let cfg = DEFAULT_FIREBASE_CONFIG;
-      if (storedCfg) {
-        try {
-          cfg = JSON.parse(storedCfg);
-        } catch(e) {
-          const clean = storedCfg.replace(/const\s+\w+\s*=\s*/, "").replace(/;\s*$/, "").trim();
-          cfg = new Function(`return (${clean})`)();
-        }
-      }
-
-      if (!cfg) {
-        updateSyncUI("unconfigured", "Cloud");
-        $("sync-status-details").innerHTML = "Statut : <b>Non configuré</b> (Mode 100% local actif). Cliquez pour connecter votre projet Firebase.";
-        return;
-      }
-
-      $("sync-cfg-input").value = JSON.stringify(cfg, null, 2);
-      updateSyncUI("syncing", "Connexion...");
+      const syncId = (localStorage.getItem(SYNC_ID_KEY) || "enoch-winter-2026").trim();
+      updateSyncUI("syncing", "Sync...");
 
       try {
         const { initializeApp, getApps } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
@@ -1469,7 +1480,7 @@
           onSnapshot
         } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
 
-        const app = getApps().length === 0 ? initializeApp(cfg) : getApps()[0];
+        const app = getApps().length === 0 ? initializeApp(DEFAULT_FIREBASE_CONFIG) : getApps()[0];
 
         try {
           db = initializeFirestore(app, {
@@ -1499,208 +1510,28 @@
 
           if (hasPendingWrites) {
             updateSyncUI("offline", "En attente");
-            $("sync-status-details").innerHTML = `Statut : <b>🟠 Hors-ligne / En attente</b>. Données enregistrées dans le cache de votre appareil. Dès que la connexion sera rétablie, elles seront envoyées à Google Cloud.`;
           } else {
-            updateSyncUI("synced", "Synchro");
-            $("sync-status-details").innerHTML = `Statut : <b>🟢 Connecté & Synchronisé</b>. Vos données sont synchronisées sur tous les appareils utilisant l'ID : <code>${esc(syncId)}</code>.`;
+            updateSyncUI("synced", "Sync");
           }
         }, (err) => {
-          console.warn("Écoute Firestore interrompue :", err);
+          console.warn("Firestore offline mode:", err);
           updateSyncUI("offline", "Hors-ligne");
-          $("sync-status-details").innerHTML = `Statut : <b>⚠️ Connexion réseau coupée</b>. Vous êtes en mode hors-ligne, vos données restent enregistrées localement sans aucun risque de perte.`;
         });
 
       } catch (err) {
-        console.error("Échec d'initialisation Firebase :", err);
+        console.warn("Firebase non connecté :", err);
         updateSyncUI("offline", "Local");
-        $("sync-status-details").innerHTML = `Statut : <b>⚠️ Erreur de configuration</b> (${esc(err.message)}). Vérifiez le format de votre objet Firebase.`;
       }
     }
 
-    // Gestion de l'état réseau navigateur
     window.addEventListener("online", () => {
-      if (db) {
-        updateSyncUI("syncing", "Synchro...");
-        pushToCloud();
-      }
+      if (db) { updateSyncUI("syncing", "Sync..."); pushToCloud(); }
     });
     window.addEventListener("offline", () => {
       if (db) updateSyncUI("offline", "Hors-ligne");
     });
 
-    /* Interactions de Synchronisation */
-    $("sync-btn").onclick = () => {
-      $("sync-modal").classList.remove("hide");
-      $("track").classList.add("hide");
-      $("manage").classList.add("hide");
-      $("quote-card").classList.add("hide");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
-    $("sync-close").onclick = () => {
-      $("sync-modal").classList.add("hide");
-      $("track").classList.remove("hide");
-      $("quote-card").classList.remove("hide");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
-    $("sync-save-btn").onclick = async () => {
-      const syncId = ($("sync-id-input").value || "enoch-winter-2026").trim();
-      const cfgRaw = $("sync-cfg-input").value.trim();
-
-      if (!cfgRaw) {
-        alert("Veuillez coller votre configuration Firebase.");
-        return;
-      }
-
-      localStorage.setItem(SYNC_ID_KEY, syncId);
-      localStorage.setItem(FIREBASE_CFG_KEY, cfgRaw);
-      await initFirebase();
-      await pushToCloud();
-      msg("✓ Synchronisation configurée avec succès !");
-    };
-
-    $("sync-disconnect-btn").onclick = () => {
-      if (confirm("Voulez-vous déconnecter la synchronisation Cloud sur cet appareil ? Les données locales seront conservées.")) {
-        localStorage.removeItem(FIREBASE_CFG_KEY);
-        if (syncUnsub) { syncUnsub(); syncUnsub = null; }
-        db = null;
-        $("sync-cfg-input").value = "";
-        updateSyncUI("unconfigured", "Cloud");
-        $("sync-status-details").innerHTML = "Statut : Déconnecté (Mode 100% local actif).";
-        msg("Cloud déconnecté.");
-      }
-    };
-
-    /* Interactions & Événements */
-    $("list").onclick = e => {
-      const b = e.target.closest("button[data-a]");
-      if (!b) return;
-      const id = b.dataset.id, a = b.dataset.a, k = KEYS[sel];
-      if (a === "note") {
-        OPEN.has(id) ? OPEN.delete(id) : OPEN.add(id);
-      } else {
-        const prevScore = score(k);
-        setEntry(k, id, x => { x.s = x.s === a ? undefined : a; });
-        save();
-        if (a === "ok" && prevScore < 100 && score(k) === 100) {
-          launchCelebration();
-        }
-      }
-      render();
-    };
-
-    $("list").oninput = e => {
-      const t = e.target;
-      if (t.tagName !== "TEXTAREA") return;
-      setEntry(KEYS[sel], t.dataset.id, x => { x.c = t.value; });
-      save();
-    };
-
-    $("list").onfocusout = e => {
-      if (e.target.tagName === "TEXTAREA") render();
-    };
-
-    $("grid").onclick = e => {
-      const b = e.target.closest(".c[data-j]");
-      if (!b) return;
-      sel = +b.dataset.j;
-      render();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    };
-
-    $("prev").onclick = () => { if (sel > 0) { sel--; render(); } };
-    $("next").onclick = () => { if (sel < KEYS.length - 1) { sel++; render(); } };
-    $("today-btn").onclick = () => { sel = ti; render(); };
-
-    function showManage(on) {
-      $("manage").classList.toggle("hide", !on);
-      $("track").classList.toggle("hide", on);
-      $("mng").classList.toggle("hide", on);
-      $("sync-modal").classList.add("hide");
-      $("quote-card").classList.toggle("hide", on);
-      pend = null;
-      if (on) renderManage();
-      else render();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    $("mng").onclick = () => showManage(true);
-    $("done").onclick = () => showManage(false);
-
-    $("mlist").oninput = e => {
-      const t = e.target, h = S.habits.find(x => x.id === t.dataset.id);
-      if (!h) return;
-      if (t.dataset.f === "n") h.n = t.value;
-      else h.d = t.value;
-      save();
-    };
-
-    $("mlist").onfocusout = e => {
-      const t = e.target, h = S.habits.find(x => x.id === t.dataset.id);
-      if (h && t.dataset.f === "n" && !h.n.trim()) {
-        h.n = "Habitude";
-        t.value = h.n;
-        save();
-      }
-    };
-
-    $("mlist").onclick = e => {
-      const b = e.target.closest("[data-del]");
-      if (!b) return;
-      const id = b.dataset.del;
-      if (pend === id) {
-        S.habits = S.habits.filter(h => h.id !== id);
-        pend = null;
-        save();
-      } else {
-        pend = id;
-      }
-      renderManage();
-    };
-
-    $("add").onclick = () => {
-      const n = $("newn").value.trim();
-      if (!n) { $("newn").focus(); return; }
-      S.habits.push({ id: "h" + Date.now().toString(36), n, d: $("newd").value.trim() });
-      $("newn").value = "";
-      $("newd").value = "";
-      save();
-      renderManage();
-    };
-
-    /* Sauvegarde Locale Manuelle */
-    const msg = t => {
-      $("msg").textContent = t;
-      setTimeout(() => { if ($("msg").textContent === t) $("msg").textContent = ""; }, 4000);
-    };
-
-    $("copy").onclick = async () => {
-      const t = JSON.stringify(S);
-      $("box").value = t;
-      try {
-        await navigator.clipboard.writeText(t);
-        msg("✓ Sauvegarde copiée dans le presse-papier !");
-      } catch (e) {
-        $("box").select();
-        msg("Copie le texte ci-dessus et conserve-le dans tes notes.");
-      }
-    };
-
-    $("imp").onclick = () => {
-      try {
-        const o = JSON.parse($("box").value);
-        if (!o || !Array.isArray(o.habits) || typeof o.log !== "object") throw 0;
-        S = o;
-        save();
-        render();
-        msg("✓ Sauvegarde restaurée avec succès !");
-      } catch (e) {
-        msg("⚠️ Données invalides. Vérifie le format JSON.");
-      }
-    };
-
-    // Initialisation
+    // Initialisation générale
     initTheme();
     render();
     initFirebase();
