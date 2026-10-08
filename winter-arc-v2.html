@@ -1425,30 +1425,40 @@
       }
     }
 
+    const DEFAULT_FIREBASE_CONFIG = {
+      apiKey: "AIzaSyDXAqZ9MFH37BKdYKs5fTl5JK5tOKGzBXs",
+      authDomain: "projet-arc-92b16.firebaseapp.com",
+      projectId: "projet-arc-92b16",
+      storageBucket: "projet-arc-92b16.firebasestorage.app",
+      messagingSenderId: "63100339515",
+      appId: "1:63100339515:web:289be3d02da210d47ba31e"
+    };
+
     async function initFirebase() {
-      const cfgStr = localStorage.getItem(FIREBASE_CFG_KEY);
+      const storedCfg = localStorage.getItem(FIREBASE_CFG_KEY);
       const syncId = localStorage.getItem(SYNC_ID_KEY) || "enoch-winter-2026";
       $("sync-id-input").value = syncId;
 
-      if (!cfgStr) {
+      let cfg = DEFAULT_FIREBASE_CONFIG;
+      if (storedCfg) {
+        try {
+          cfg = JSON.parse(storedCfg);
+        } catch(e) {
+          const clean = storedCfg.replace(/const\s+\w+\s*=\s*/, "").replace(/;\s*$/, "").trim();
+          cfg = new Function(`return (${clean})`)();
+        }
+      }
+
+      if (!cfg) {
         updateSyncUI("unconfigured", "Cloud");
         $("sync-status-details").innerHTML = "Statut : <b>Non configuré</b> (Mode 100% local actif). Cliquez pour connecter votre projet Firebase.";
         return;
       }
 
-      $("sync-cfg-input").value = cfgStr;
+      $("sync-cfg-input").value = JSON.stringify(cfg, null, 2);
       updateSyncUI("syncing", "Connexion...");
 
       try {
-        let cfg;
-        try {
-          cfg = JSON.parse(cfgStr);
-        } catch(e) {
-          // Essai d'extraction d'objet JS si collé avec const firebaseConfig = {...}
-          const clean = cfgStr.replace(/const\s+\w+\s*=\s*/, "").replace(/;\s*$/, "").trim();
-          cfg = new Function(`return (${clean})`)();
-        }
-
         const { initializeApp, getApps } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
         const {
           initializeFirestore,
