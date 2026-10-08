@@ -1316,9 +1316,9 @@
         <div class="metric-footer" id="metric-streak-sub">Continue comme ça !</div>
       </div>
 
-      <!-- Carte 2 : Progression Globale -->
+      <!-- Carte 2 : Progression Globale (92 jours du 1er Octobre au 31 Décembre) -->
       <div class="metric-card">
-        <div class="metric-header">Progression Globale</div>
+        <div class="metric-header">Progression Globale (92j)</div>
         <div class="metric-body-progress">
           <svg class="ring-svg" viewBox="0 0 80 80">
             <circle class="ring-bg" cx="40" cy="40" r="34"></circle>
@@ -1326,11 +1326,11 @@
           </svg>
           <div class="ring-label">
             <span class="ring-days-val" id="metric-days-passed-val">8</span>
-            <span class="ring-days-unit">jours</span>
+            <span class="ring-days-unit" id="metric-days-unit">sur 92 jours</span>
           </div>
         </div>
         <div class="metric-footer countdown" id="metric-countdown-footer">
-          sur <span id="metric-countdown-val">84</span>
+          ⏳ <span id="metric-countdown-val">84</span> jours restants
         </div>
       </div>
     </section>
@@ -1644,18 +1644,21 @@
       $("metric-streak-val").textContent = curStreak;
       $("metric-streak-sub").textContent = curStreak >= 7 ? "En feu ! 🔥" : "Continue comme ça !";
       
-      // Nombre de jours passés à l'intérieur du cercle
+      // Nombre de jours passés sur les 92 jours du défi (du 1er oct au 31 déc)
       $("metric-days-passed-val").textContent = daysPassed;
+      const unitDays = $("metric-days-unit");
+      if (unitDays) unitDays.textContent = `sur ${totalDays} jours`;
 
-      // Cercle SVG : progression des jours dans le défi Winter Arc
+      // Cercle SVG : progression des jours dans le défi Winter Arc (8 / 92)
       const ringFill = $("ring-fill");
       const circ = 213.63; // 2 * PI * 34
       const progressRatio = Math.min(1, Math.max(0, daysPassed / totalDays));
       const offset = circ - (progressRatio * circ);
       ringFill.style.strokeDashoffset = offset;
 
-      // Compte à rebours à l'extérieur : "sur X"
-      $("metric-countdown-footer").innerHTML = `sur <span id="metric-countdown-val">${daysLeft}</span>`;
+      // Compte à rebours à l'extérieur : jours restants jusqu'au 31 décembre
+      const unitJours = daysLeft <= 1 ? "jour restant" : "jours restants";
+      $("metric-countdown-footer").innerHTML = `⏳ <span id="metric-countdown-val">${daysLeft}</span> ${unitJours}`;
 
       // 2. Vue Grilles (Annuelle)
       renderYearlyView();
