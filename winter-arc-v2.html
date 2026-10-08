@@ -646,19 +646,21 @@
       -webkit-backdrop-filter: var(--glass);
       border: 1px solid var(--card-border);
       border-radius: 16px;
-      padding: 14px 16px;
+      padding: 13px 12px;
       display: flex;
       flex-direction: column;
       gap: 10px;
       box-shadow: var(--shadow-card);
       position: relative;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     .daily-item-row {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
+      flex-direction: column;
+      gap: 10px;
       width: 100%;
       min-width: 0;
     }
@@ -667,19 +669,31 @@
       display: flex;
       gap: 6px;
       align-items: center;
-      flex-shrink: 0;
+      width: 100%;
+      min-width: 0;
     }
 
     .btn-act {
-      padding: 7px 12px;
+      flex: 1;
+      padding: 8px 6px;
       border-radius: 10px;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 600;
       border: 1.5px solid var(--card-border);
       background: var(--cell-empty);
       color: var(--ink);
       cursor: pointer;
       transition: all 0.2s;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      white-space: nowrap;
+    }
+
+    .btn-act[data-da="ok"] {
+      flex: 1.3;
     }
 
     .btn-act:disabled {
@@ -707,12 +721,34 @@
     }
 
     .locked-badge {
-      font-size: 11.5px;
+      font-size: 12px;
       color: var(--mute);
       background: var(--cell-empty);
-      padding: 4px 8px;
+      border: 1px solid var(--card-border);
+      padding: 7px 12px;
       border-radius: 8px;
       font-weight: 600;
+      width: 100%;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    @media (min-width: 480px) {
+      .daily-item-row {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .daily-acts {
+        width: auto;
+      }
+      .daily-acts .btn-act {
+        flex: initial;
+        padding: 7px 12px;
+      }
+      .locked-badge {
+        width: auto;
+      }
     }
 
     textarea.note-box {
@@ -815,36 +851,7 @@
       font-weight: 700;
     }
 
-    /* Floating Action Button (FAB) flottant au-dessus de la barre de navigation */
-    .fab-add {
-      position: fixed;
-      right: 20px;
-      bottom: calc(76px + env(safe-area-inset-bottom, 0px));
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #8B5CF6, #6366F1);
-      color: #FFFFFF;
-      font-size: 26px;
-      font-weight: 300;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: none;
-      box-shadow: 0 8px 24px rgba(139, 92, 246, 0.45);
-      cursor: pointer;
-      z-index: 600;
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s;
-    }
 
-    .fab-add:hover {
-      transform: scale(1.1) rotate(90deg);
-      box-shadow: 0 10px 28px rgba(139, 92, 246, 0.6);
-    }
-
-    .fab-add:active {
-      transform: scale(0.95);
-    }
 
     /* =========================================================
        HABIT MANAGEMENT VIEW (GESTION DES HABITUDES - ONGLET ENGRENAGE)
@@ -1323,7 +1330,7 @@
           </div>
         </div>
         <div class="metric-footer countdown" id="metric-countdown-footer">
-          sur <span id="metric-countdown-val">84</span> jours restants
+          sur <span id="metric-countdown-val">84</span>
         </div>
       </div>
     </section>
@@ -1344,26 +1351,15 @@
       <div id="daily-items-list" class="habits-container"></div>
     </section>
 
-    <!-- VIEW 3: STATS & BACKUP VIEW -->
+    <!-- VIEW 3: STATS VIEW -->
     <section id="view-stats" class="hide">
-      <div class="habit-card" style="margin-bottom:14px">
+      <div class="habit-card">
         <div class="habit-name" style="margin-bottom:6px">🔥 Analyse de Discipline</div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center;margin-top:12px">
           <div><b id="glob-streak" style="font-size:24px;color:var(--ember);display:block">0</b><span style="font-size:12px;color:var(--mute)">Série en cours</span></div>
           <div><b id="glob-best" style="font-size:24px;color:var(--ice);display:block">0</b><span style="font-size:12px;color:var(--mute)">Record série</span></div>
           <div><b id="glob-avg" style="font-size:24px;color:var(--ink);display:block">0%</b><span style="font-size:12px;color:var(--mute)">Taux global</span></div>
         </div>
-      </div>
-
-      <div class="habit-card">
-        <div class="habit-name" style="margin-bottom:6px">💾 Sauvegarde & Restauration</div>
-        <p class="habit-desc" style="white-space:normal;margin-bottom:10px">Vos données sont synchronisées automatiquement avec Firebase, mais vous pouvez aussi exporter une copie locale.</p>
-        <textarea id="backup-box" style="height:70px;font-family:monospace;font-size:11px" placeholder="Coller une sauvegarde JSON"></textarea>
-        <div style="display:flex;gap:8px">
-          <button class="btn p" id="backup-copy-btn" style="flex:1">Copier</button>
-          <button class="btn" id="backup-restore-btn" style="flex:1">Restaurer</button>
-        </div>
-        <div id="backup-msg" style="font-size:12px;color:var(--ice);margin-top:8px"></div>
       </div>
     </section>
 
@@ -1378,9 +1374,6 @@
       </div>
       <div id="habits-mgmt-list" class="habits-mgmt-container"></div>
     </section>
-
-    <!-- Floating Action Button (+) -->
-    <button class="fab-add" id="fab-add" title="Ajouter une habitude">+</button>
 
     <!-- Fixed Bottom Navigation Bar (Barre en pied de page) -->
     <nav class="bottom-nav">
@@ -2037,7 +2030,6 @@
       $("new-h-name").focus();
     }
 
-    $("fab-add").onclick = openAddModal;
     const openAddBtn = $("open-add-habit-btn");
     if (openAddBtn) openAddBtn.onclick = openAddModal;
     $("add-modal-close").onclick = () => $("add-modal").classList.add("hide");
@@ -2084,33 +2076,6 @@
       localStorage.setItem(SYNC_ID_KEY, sid);
       await pushToCloud();
       $("sync-modal").classList.add("hide");
-    };
-
-    // Sauvegarde & Restauration
-    $("backup-copy-btn").onclick = async () => {
-      const t = JSON.stringify(S);
-      $("backup-box").value = t;
-      try {
-        await navigator.clipboard.writeText(t);
-        $("backup-msg").textContent = "✓ Copié dans le presse-papier !";
-      } catch (e) {
-        $("backup-msg").textContent = "Copie le texte dans le cadre.";
-      }
-      setTimeout(() => { $("backup-msg").textContent = ""; }, 3500);
-    };
-
-    $("backup-restore-btn").onclick = () => {
-      try {
-        const o = JSON.parse($("backup-box").value);
-        if (!o || !Array.isArray(o.habits) || typeof o.log !== "object") throw 0;
-        S = o;
-        save();
-        render();
-        $("backup-msg").textContent = "✓ Sauvegarde restaurée !";
-      } catch (e) {
-        $("backup-msg").textContent = "⚠️ Données JSON invalides.";
-      }
-      setTimeout(() => { $("backup-msg").textContent = ""; }, 3500);
     };
 
     // Thème (Clair / Sombre)
