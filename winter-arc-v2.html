@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#090E17">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="img/Typographie%20hivernale%20WINTER%20ARC.png">
-  <title>Winter Arc 2026 — Habits & Progression</title>
+  <title>Arc — Winter 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -99,8 +99,16 @@
 
     .app-title-wrap {
       display: flex;
-      align-items: baseline;
-      gap: 8px;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo-img {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 8px var(--ice-glow));
+      border-radius: 6px;
     }
 
     .app-title {
@@ -112,7 +120,7 @@
     }
 
     .app-badge {
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 700;
       color: var(--ember);
       background: rgba(251, 146, 60, 0.12);
@@ -128,7 +136,7 @@
       gap: 8px;
     }
 
-    /* Segmented Control Tabs (Single / Weekly / Yearly) */
+    /* Segmented Control Tabs (Single / Grilles / Stats) */
     .view-tabs {
       background: rgba(15, 23, 42, 0.6);
       backdrop-filter: var(--glass);
@@ -138,7 +146,7 @@
       border-radius: 14px;
       display: flex;
       gap: 4px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     :root[data-theme="light"] .view-tabs {
@@ -238,50 +246,138 @@
       transform: translateY(-1px);
     }
 
-    /* Overall Summary Banner */
-    .summary-card {
+    /* =========================================================
+       DUO CARDS : CURRENT STREAK & GOAL PROGRESS (IMAGE ATTACHÉE)
+       ========================================================= */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .metric-card {
       background: var(--card);
       backdrop-filter: var(--glass);
       -webkit-backdrop-filter: var(--glass);
       border: 1px solid var(--card-border);
       border-radius: var(--radius-card);
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 18px;
+      padding: 16px 14px 14px;
       box-shadow: var(--shadow-card);
-    }
-
-    .summary-left {
       display: flex;
       flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      transition: transform 0.2s;
     }
 
-    .summary-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--ink);
+    .metric-card:hover {
+      transform: translateY(-2px);
     }
 
-    .summary-sub {
-      font-size: 12px;
+    .metric-header {
+      font-size: 13px;
+      font-weight: 600;
       color: var(--mute);
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
     }
 
-    .summary-score {
+    /* Streak Card Center */
+    .metric-body-streak {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      padding: 6px 0;
+    }
+
+    .streak-display {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 2px;
+    }
+
+    .streak-flame {
+      font-size: 28px;
+      filter: drop-shadow(0 2px 8px var(--ember-glow));
+    }
+
+    .streak-number {
       font-family: 'Outfit', sans-serif;
-      font-size: 32px;
+      font-size: 36px;
       font-weight: 800;
-      color: var(--ice);
+      color: var(--ink);
       line-height: 1;
       font-variant-numeric: tabular-nums;
     }
 
+    .streak-unit {
+      font-size: 13px;
+      color: var(--mute);
+      font-weight: 600;
+    }
+
+    .metric-footer {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ice);
+      margin-top: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    /* Goal Progress Card Center (SVG Ring) */
+    .metric-body-progress {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 82px;
+      height: 82px;
+      margin: 2px 0;
+    }
+
+    .ring-svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .ring-bg {
+      fill: none;
+      stroke: var(--cell-empty);
+      stroke-width: 7;
+    }
+
+    .ring-fill {
+      fill: none;
+      stroke: #38BDF8;
+      stroke-width: 7;
+      stroke-linecap: round;
+      stroke-dasharray: 213.63;
+      stroke-dashoffset: 213.63;
+      transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.45));
+    }
+
+    .ring-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+    }
+
     /* =========================================================
-       HABIT CARD WITH MINI HEATMAP (INSPIRATION SCREENSHOT)
+       HABIT CARD WITH MINI HEATMAP (14 SEMAINES DU 1ER OCT AU 31 DÉC)
        ========================================================= */
     .habits-container {
       display: grid;
@@ -413,7 +509,7 @@
       box-shadow: 0 0 16px var(--h-glow, transparent);
     }
 
-    /* Mini Heatmap Grid (86 days = 13 weeks columns x 7 weekdays rows) */
+    /* Mini Heatmap Grid (92 jours = 14 colonnes de semaines x 7 lignes) */
     .heatmap-wrap {
       display: flex;
       flex-direction: column;
@@ -423,41 +519,48 @@
 
     .heatmap-months {
       display: grid;
-      grid-template-columns: repeat(13, 1fr);
-      font-size: 10.5px;
-      font-weight: 600;
+      grid-template-columns: repeat(14, 1fr);
+      font-size: 10px;
+      font-weight: 700;
       color: var(--mute);
       text-transform: uppercase;
       letter-spacing: 0.04em;
       padding-left: 1px;
     }
 
-    .m-label-oct { grid-column: 1 / span 4; }
-    .m-label-nov { grid-column: 5 / span 4; }
-    .m-label-dec { grid-column: 9 / span 5; }
+    .m-label-oct { grid-column: 1 / span 5; }
+    .m-label-nov { grid-column: 6 / span 4; }
+    .m-label-dec { grid-column: 10 / span 5; }
 
     .heatmap-grid {
       display: grid;
-      grid-template-columns: repeat(13, 1fr);
+      grid-template-columns: repeat(14, 1fr);
       grid-template-rows: repeat(7, 1fr);
       grid-auto-flow: column;
-      gap: 4px;
+      gap: 3.5px;
     }
 
     .dot {
       aspect-ratio: 1;
-      border-radius: 3.5px;
+      border-radius: 3px;
       background: var(--cell-empty);
       border: 1px solid transparent;
-      cursor: pointer;
       position: relative;
       transition: transform 0.15s, box-shadow 0.15s;
     }
 
-    .dot:hover {
+    .dot.clickable {
+      cursor: pointer;
+    }
+
+    .dot.clickable:hover {
       transform: scale(1.35);
       z-index: 10;
       box-shadow: 0 0 8px var(--h-glow, rgba(255,255,255,0.4));
+    }
+
+    .dot.locked {
+      cursor: not-allowed;
     }
 
     .dot.empty-slot {
@@ -469,6 +572,7 @@
     .dot.fut {
       background: var(--cell-fut);
       opacity: 0.35;
+      cursor: not-allowed;
     }
 
     .dot.active {
@@ -566,6 +670,7 @@
     .daily-acts {
       display: flex;
       gap: 8px;
+      align-items: center;
     }
 
     .btn-act {
@@ -578,6 +683,11 @@
       color: var(--ink);
       cursor: pointer;
       transition: all 0.2s;
+    }
+
+    .btn-act:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
     }
 
     .btn-act.on-ok {
@@ -597,6 +707,15 @@
     .btn-act.note-btn.has {
       border-color: var(--ice);
       color: var(--ice);
+    }
+
+    .locked-badge {
+      font-size: 11.5px;
+      color: var(--mute);
+      background: var(--cell-empty);
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-weight: 600;
     }
 
     textarea.note-box {
@@ -646,6 +765,33 @@
 
     .fab-add:active {
       transform: scale(0.95);
+    }
+
+    /* Toast Notification (Anti-Triche & Alerte) */
+    #toast-msg {
+      position: fixed;
+      bottom: 86px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(15, 23, 42, 0.95);
+      color: #FFFFFF;
+      padding: 10px 18px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.25s, transform 0.25s;
+      z-index: 9999;
+      text-align: center;
+      max-width: 90vw;
+    }
+
+    #toast-msg.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
     }
 
     /* Modals & Overlays */
@@ -792,13 +938,15 @@
 
 <body>
   <canvas id="confetti-canvas"></canvas>
+  <div id="toast-msg"></div>
 
   <main>
-    <!-- Top Header Bar -->
+    <!-- Top Header Bar (Branding Arc) -->
     <header class="top-bar">
       <div class="app-title-wrap">
-        <h1 class="app-title">Habits</h1>
-        <span class="app-badge" id="day-badge">Jour 1/86</span>
+        <img src="img/Typographie%20hivernale%20WINTER%20ARC.png" alt="Arc" class="brand-logo-img" onerror="this.style.display='none'">
+        <h1 class="app-title">Arc</h1>
+        <span class="app-badge" id="day-badge">Jour 8/92</span>
       </div>
       <div class="top-controls">
         <button class="sync-btn" id="sync-btn" title="Statut de synchronisation Cloud">
@@ -809,10 +957,10 @@
       </div>
     </header>
 
-    <!-- Segmented Control Tabs (Single / Grilles / Stats) -->
+    <!-- Segmented Control Tabs (Grilles / Quotidien / Bilan) -->
     <nav class="view-tabs">
       <button class="tab-btn active" id="tab-yearly" data-tab="yearly">
-        <span>㗊</span> Grilles (86j)
+        <span>㗊</span> Grilles (92j)
       </button>
       <button class="tab-btn" id="tab-single" data-tab="single">
         <span>⊞</span> Quotidien
@@ -822,16 +970,36 @@
       </button>
     </nav>
 
-    <!-- Overall Summary Banner -->
-    <section class="summary-card">
-      <div class="summary-left">
-        <span class="summary-title" id="summary-headline">Discipline du Jour</span>
-        <span class="summary-sub" id="summary-sub">0 sur 13 habitudes complétées</span>
+    <!-- DUO CARDS : CURRENT STREAK & GOAL PROGRESS (IMAGE CHARGÉE) -->
+    <section class="metrics-row" id="metrics-duo">
+      <!-- Card 1 : Current Streak -->
+      <div class="metric-card">
+        <div class="metric-header">Current Streak</div>
+        <div class="metric-body-streak">
+          <div class="streak-display">
+            <span class="streak-flame">🔥</span>
+            <span class="streak-number" id="metric-streak-val">0</span>
+          </div>
+          <span class="streak-unit">days</span>
+        </div>
+        <div class="metric-footer" id="metric-streak-sub">Keep it going!</div>
       </div>
-      <div class="summary-score" id="summary-pct">0%</div>
+
+      <!-- Card 2 : Goal Progress -->
+      <div class="metric-card">
+        <div class="metric-header">Goal Progress</div>
+        <div class="metric-body-progress">
+          <svg class="ring-svg" viewBox="0 0 80 80">
+            <circle class="ring-bg" cx="40" cy="40" r="34"></circle>
+            <circle class="ring-fill" id="ring-fill" cx="40" cy="40" r="34"></circle>
+          </svg>
+          <div class="ring-label" id="metric-pct-val">0%</div>
+        </div>
+        <div class="metric-footer">Winter Arc Goal</div>
+      </div>
     </section>
 
-    <!-- VIEW 1: YEARLY / ALL HABITS HEATMAPS (Matches Screenshot) -->
+    <!-- VIEW 1: YEARLY / ALL HABITS HEATMAPS (Du 1er Oct au 31 Déc) -->
     <section id="view-yearly" class="habits-container"></section>
 
     <!-- VIEW 2: SINGLE / DAILY DETAIL VIEW -->
@@ -839,7 +1007,7 @@
       <div class="day-selector">
         <button class="day-btn" id="prev-day">‹</button>
         <div class="day-info">
-          <div class="day-text" id="cur-day-label">Mercredi 7 octobre</div>
+          <div class="day-text" id="cur-day-label">Jeudi 8 octobre</div>
           <div class="day-sub" id="cur-day-sub">Aujourd'hui</div>
         </div>
         <button class="day-btn" id="next-day">›</button>
@@ -850,11 +1018,11 @@
     <!-- VIEW 3: STATS & BACKUP VIEW -->
     <section id="view-stats" class="hide">
       <div class="habit-card" style="margin-bottom:14px">
-        <div class="habit-name" style="margin-bottom:6px">🔥 Statistiques Globales</div>
+        <div class="habit-name" style="margin-bottom:6px">🔥 Analyse de Discipline</div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center;margin-top:12px">
           <div><b id="glob-streak" style="font-size:24px;color:var(--ember);display:block">0</b><span style="font-size:12px;color:var(--mute)">Série en cours</span></div>
           <div><b id="glob-best" style="font-size:24px;color:var(--ice);display:block">0</b><span style="font-size:12px;color:var(--mute)">Record série</span></div>
-          <div><b id="glob-avg" style="font-size:24px;color:var(--ink);display:block">0%</b><span style="font-size:12px;color:var(--mute)">Moyenne</span></div>
+          <div><b id="glob-avg" style="font-size:24px;color:var(--ink);display:block">0%</b><span style="font-size:12px;color:var(--mute)">Taux global</span></div>
         </div>
       </div>
 
@@ -947,19 +1115,21 @@
     ];
 
     const K2 = "winterarc2026v2", THEME_KEY = "winterarc_theme", SYNC_ID_KEY = "winterarc_sync_id";
-    const START = new Date(2026, 9, 7, 12, 0, 0); // 7 Octobre 2026
-    const END = new Date(2026, 11, 31, 12, 0, 0); // 31 Décembre 2026
+    
+    // Début le 1er Octobre 2026 jusqu'au 31 Décembre 2026 (92 jours au total)
+    const START = new Date(2026, 9, 1, 12, 0, 0); 
+    const END = new Date(2026, 11, 31, 12, 0, 0); 
     const pad = n => String(n).padStart(2, "0");
     const key = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 
-    // Génération des 86 jours
+    // Génération des 92 jours
     const DAYS = [];
     for (let d = new Date(START); d <= END; d.setDate(d.getDate() + 1)) {
       DAYS.push(new Date(d));
     }
     const KEYS = DAYS.map(key);
 
-    // Découpage en 13 semaines (colonnes) pour les grilles
+    // Découpage en 14 semaines (colonnes) pour les grilles
     const getDow = d => (d.getDay() + 6) % 7; // Lun=0 à Dim=6
     const WEEKS = [];
     let curWeek = new Array(7).fill(null);
@@ -984,6 +1154,13 @@
     const $ = id => document.getElementById(id);
     const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
+    function showToast(text) {
+      const toast = $("toast-msg");
+      toast.textContent = text;
+      toast.classList.add("show");
+      setTimeout(() => { toast.classList.remove("show"); }, 3200);
+    }
+
     /* Chargement initial LocalStorage */
     function loadState() {
       try {
@@ -991,7 +1168,6 @@
         if (raw) {
           const o = JSON.parse(raw);
           if (o && Array.isArray(o.habits)) {
-            // Assurer que chaque habitude possède une couleur et un icône
             o.habits.forEach((h, i) => {
               if (!h.color) h.color = PALETTE[i % PALETTE.length];
               if (!h.icon) h.icon = "⚡";
@@ -1020,7 +1196,22 @@
     const countOk = k => S.habits.filter(h => ent(k, h.id).s === "ok").length;
     const dayScore = k => S.habits.length ? Math.round((countOk(k) / S.habits.length) * 100) : 0;
 
+    /* ========================================================
+       RÈGLE MÉTIER ANTI-TRICHE : SEUL LE JOUR EN COURS EST COCHABLE
+       ======================================================== */
     function toggleHabit(dateKey, habitId) {
+      const todayKey = KEYS[ti];
+      
+      // Règle métier : On ne peut plus cocher après ou avant le jour en cours !
+      if (dateKey !== todayKey) {
+        if (dateKey > todayKey) {
+          showToast("🔒 Impossible : Les jours futurs ne peuvent pas être validés à l'avance.");
+        } else {
+          showToast("🔒 Jour verrouillé : Impossible de modifier une journée passée.");
+        }
+        return;
+      }
+
       S.log[dateKey] = S.log[dateKey] || {};
       const current = S.log[dateKey][habitId] ? S.log[dateKey][habitId].s : null;
       const next = current === "ok" ? null : "ok";
@@ -1034,18 +1225,16 @@
       }
       save();
 
-      // Vérifier si journée à 100%
       if (next === "ok" && dayScore(dateKey) === 100) {
         launchCelebration();
       }
       render();
     }
 
-    /* Calcul de série (streak) d'une habitude spécifique */
+    /* Calculs de séries (streaks) */
     function getHabitStreak(habitId) {
       let streak = 0;
       let i = ti;
-      // Si non validé aujourd'hui, vérifier à partir d'hier
       if (ent(KEYS[i], habitId).s !== "ok") i--;
       while (i >= 0 && ent(KEYS[i], habitId).s === "ok") {
         streak++;
@@ -1062,28 +1251,57 @@
       return count;
     }
 
+    /* Série globale actuelle (jours consécutifs avec score >= 80%) */
+    function getGlobalStreak() {
+      let streak = 0;
+      let i = ti;
+      if (dayScore(KEYS[i]) < 80) i--;
+      while (i >= 0 && dayScore(KEYS[i]) >= 80) {
+        streak++;
+        i--;
+      }
+      return streak;
+    }
+
+    /* Taux de progression globale depuis le 1er Octobre jusqu'à aujourd'hui */
+    function getGlobalProgressPct() {
+      let totalOk = 0;
+      const totalPossible = S.habits.length * (ti + 1);
+      if (!totalPossible) return 0;
+      for (let j = 0; j <= ti; j++) {
+        totalOk += countOk(KEYS[j]);
+      }
+      return Math.round((totalOk / totalPossible) * 100);
+    }
+
     /* ========================================================
        RENDU DES VUES (YEARLY GRILLES, DAILY, STATS)
        ======================================================== */
     function render() {
-      // 1. Barre de résumé
-      const todayKey = KEYS[ti];
-      const todayOk = countOk(todayKey);
-      const totalH = S.habits.length;
-      const pct = dayScore(todayKey);
+      // 1. Badge d'en-tête
+      $("day-badge").textContent = `Jour ${ti + 1}/92`;
 
-      $("day-badge").textContent = `Jour ${ti + 1}/86`;
-      $("summary-headline").textContent = pct === 100 ? "Journée Parfaite ! 🔥" : "Discipline du Jour";
-      $("summary-sub").textContent = `${todayOk} sur ${totalH} complétée${todayOk > 1 ? "s" : ""}`;
-      $("summary-pct").textContent = `${pct}%`;
+      // 2. Les 2 cartes métriques (Current Streak & Goal Progress)
+      const curStreak = getGlobalStreak();
+      const goalPct = getGlobalProgressPct();
 
-      // 2. Vue Grilles (Annuelle / Screenshot)
+      $("metric-streak-val").textContent = curStreak;
+      $("metric-streak-sub").textContent = curStreak >= 7 ? "En feu ! 🔥" : "Keep it going!";
+      
+      $("metric-pct-val").textContent = `${goalPct}%`;
+      // Circonférence du cercle SVG r=34 -> 2 * PI * 34 ≈ 213.63
+      const ringFill = $("ring-fill");
+      const circ = 213.63;
+      const offset = circ - (goalPct / 100) * circ;
+      ringFill.style.strokeDashoffset = offset;
+
+      // 3. Vue Grilles (Annuelle)
       renderYearlyView();
 
-      // 3. Vue Quotidienne (Single)
+      // 4. Vue Quotidienne (Single)
       renderDailyView();
 
-      // 4. Vue Stats
+      // 5. Vue Bilan
       renderStatsView();
     }
 
@@ -1097,7 +1315,7 @@
         const total = getHabitTotalDays(h.id);
         const glow = h.color + "55";
 
-        // Génération des 13 colonnes x 7 lignes du heatmap
+        // Génération des 14 colonnes x 7 lignes du heatmap
         let dotsHtml = "";
         for (let col = 0; col < WEEKS.length; col++) {
           for (let row = 0; row < 7; row++) {
@@ -1110,23 +1328,25 @@
               const entry = ent(dKey, h.id);
               const isOk = entry.s === "ok";
               const isKo = entry.s === "ko";
-              const isT = dIndex === ti;
+              const isToday = dIndex === ti;
               const isFut = dIndex > ti;
 
               let dotClass = "dot";
               if (isOk) dotClass += " active";
               else if (isKo) dotClass += " ko";
               if (isFut) dotClass += " fut";
-              if (isT) dotClass += " today";
+              if (isToday) dotClass += " today clickable";
+              else dotClass += " locked";
 
               const dateLabel = dateObj.toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
-              const titleText = `${dateLabel} : ${isOk ? "Validé ✓" : (isKo ? "Échoué ✕" : "Non validé")}`;
+              let statusText = isOk ? "Validé ✓" : (isKo ? "Échoué ✕" : "Non validé");
+              if (!isToday) statusText += " (Verrouillé 🔒)";
 
               dotsHtml += `
                 <div class="${dotClass}" 
                   data-k="${dKey}" 
                   data-id="${h.id}" 
-                  title="${titleText}">
+                  title="${dateLabel} : ${statusText}">
                 </div>
               `;
             }
@@ -1173,8 +1393,10 @@
     function renderDailyView() {
       const selKey = KEYS[sel];
       const selDate = DAYS[sel];
+      const isToday = sel === ti;
+
       $("cur-day-label").textContent = selDate.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
-      $("cur-day-sub").textContent = sel === ti ? "Aujourd'hui" : (sel < ti ? "Jour passé" : "À venir");
+      $("cur-day-sub").textContent = isToday ? "Aujourd'hui (Modifications autorisées)" : (sel < ti ? "Jour passé (Verrouillé 🔒)" : "À venir (Verrouillé 🔒)");
       $("prev-day").disabled = sel === 0;
       $("next-day").disabled = sel === KEYS.length - 1;
 
@@ -1192,13 +1414,17 @@
                 </div>
               </div>
               <div class="daily-acts">
-                <button class="btn-act${e.s === "ok" ? " on-ok" : ""}" data-da="ok" data-id="${h.id}">✓ Validé</button>
-                <button class="btn-act${e.s === "ko" ? " on-ko" : ""}" data-da="ko" data-id="${h.id}">✕</button>
-                <button class="btn-act note-btn${e.c ? " has" : ""}" data-da="note" data-id="${h.id}">Note</button>
+                ${isToday ? `
+                  <button class="btn-act${e.s === "ok" ? " on-ok" : ""}" data-da="ok" data-id="${h.id}">✓ Validé</button>
+                  <button class="btn-act${e.s === "ko" ? " on-ko" : ""}" data-da="ko" data-id="${h.id}">✕</button>
+                  <button class="btn-act note-btn${e.c ? " has" : ""}" data-da="note" data-id="${h.id}">Note</button>
+                ` : `
+                  <span class="locked-badge">${e.s === "ok" ? "✓ Validé 🔒" : (e.s === "ko" ? "✕ Échoué 🔒" : "Non validé 🔒")}</span>
+                `}
               </div>
             </div>
             ${e.showNote || e.c ? `
-              <textarea class="note-box" data-id="${h.id}" placeholder="Note / Réflexion du jour...">${esc(e.c || "")}</textarea>
+              <textarea class="note-box" data-id="${h.id}" placeholder="Note du jour..." ${!isToday ? "readonly" : ""}>${esc(e.c || "")}</textarea>
             ` : ""}
           </div>
         `;
@@ -1210,16 +1436,15 @@
       if (dayScore(KEYS[i]) < 80) i--;
       while (i >= 0 && dayScore(KEYS[i]) >= 80) { s++; i--; }
 
-      let best = 0, run = 0, sum = 0;
+      let best = 0, run = 0;
       for (let j = 0; j <= ti; j++) {
         const v = dayScore(KEYS[j]);
-        sum += v;
         if (v >= 80) { run++; best = Math.max(best, run); }
         else run = 0;
       }
       $("glob-streak").textContent = s;
       $("glob-best").textContent = best;
-      $("glob-avg").textContent = Math.round(sum / (ti + 1)) + "%";
+      $("glob-avg").textContent = getGlobalProgressPct() + "%";
     }
 
     /* ========================================================
@@ -1232,6 +1457,7 @@
         btn.classList.add("active");
         activeTab = btn.dataset.tab;
         $("view-yearly").classList.toggle("hide", activeTab !== "yearly");
+        $("metrics-duo").classList.toggle("hide", activeTab !== "yearly");
         $("view-single").classList.toggle("hide", activeTab !== "single");
         $("view-stats").classList.toggle("hide", activeTab !== "stats");
         render();
@@ -1239,7 +1465,7 @@
       };
     });
 
-    // Clics dans la vue Grilles (Validation rapide aujourd'hui OU clic sur un point du calendrier)
+    // Clics dans la vue Grilles
     $("view-yearly").onclick = e => {
       const todayBtn = e.target.closest("[data-act='toggle-today']");
       if (todayBtn) {
@@ -1261,6 +1487,13 @@
       const b = e.target.closest("[data-da]");
       if (!b) return;
       const id = b.dataset.id, a = b.dataset.da, k = KEYS[sel];
+      
+      // Règle métier : Seul le jour en cours peut être modifié
+      if (k !== KEYS[ti]) {
+        showToast("🔒 Jour verrouillé : Impossible de modifier les journées passées.");
+        return;
+      }
+
       S.log[k] = S.log[k] || {};
       S.log[k][id] = S.log[k][id] || {};
 
@@ -1279,6 +1512,7 @@
     $("view-single").oninput = e => {
       if (e.target.tagName !== "TEXTAREA") return;
       const id = e.target.dataset.id, k = KEYS[sel];
+      if (k !== KEYS[ti]) return; // Verrouillé
       S.log[k] = S.log[k] || {};
       S.log[k][id] = S.log[k][id] || {};
       S.log[k][id].c = e.target.value;
