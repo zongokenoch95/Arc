@@ -67,6 +67,9 @@
     html {
       scroll-behavior: smooth;
       scroll-padding-top: env(safe-area-inset-top, 0px);
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
     }
 
     body {
@@ -77,15 +80,21 @@
       font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       line-height: 1.45;
       min-height: 100vh;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
       padding-top: env(safe-area-inset-top, 0px);
       padding-bottom: calc(88px + env(safe-area-inset-bottom, 20px));
       -webkit-font-smoothing: antialiased;
     }
 
     main {
+      width: 100%;
       max-width: 560px;
       margin: 0 auto;
-      padding: 18px 14px 20px;
+      padding: 16px 12px 20px;
+      box-sizing: border-box;
+      overflow-x: hidden;
     }
 
     /* Top Bar Header */
@@ -341,7 +350,9 @@
        ========================================================= */
     .habits-container {
       display: grid;
-      gap: 14px;
+      gap: 12px;
+      width: 100%;
+      min-width: 0;
     }
 
     .habit-card {
@@ -350,10 +361,13 @@
       -webkit-backdrop-filter: var(--glass);
       border: 1px solid var(--card-border);
       border-radius: var(--radius-card);
-      padding: 16px;
+      padding: 14px 12px;
       box-shadow: var(--shadow-card);
       transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s;
       position: relative;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     .habit-card:hover {
@@ -366,15 +380,18 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 12px;
+      gap: 8px;
+      margin-bottom: 10px;
+      width: 100%;
+      min-width: 0;
     }
 
     .habit-left {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 9px;
       min-width: 0;
+      flex: 1;
     }
 
     .habit-icon {
@@ -395,45 +412,49 @@
       display: flex;
       flex-direction: column;
       min-width: 0;
+      flex: 1;
+      overflow: hidden;
     }
 
     .habit-name {
       font-family: 'Outfit', sans-serif;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       color: var(--ink);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      max-width: 100%;
     }
 
     .habit-desc {
-      font-size: 11.5px;
+      font-size: 11px;
       color: var(--mute);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      max-width: 100%;
     }
 
     .habit-right {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       flex-shrink: 0;
     }
 
     .habit-streak {
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 700;
       color: var(--ember);
       display: inline-flex;
       align-items: center;
-      gap: 3px;
+      gap: 2px;
       font-variant-numeric: tabular-nums;
     }
 
     .habit-total {
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 600;
       color: var(--mute);
       font-variant-numeric: tabular-nums;
@@ -453,6 +474,7 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      flex-shrink: 0;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -473,19 +495,24 @@
     .heatmap-wrap {
       display: flex;
       flex-direction: column;
-      gap: 5px;
+      gap: 4px;
       padding-top: 2px;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     .heatmap-months {
       display: grid;
-      grid-template-columns: repeat(14, 1fr);
-      font-size: 10px;
+      grid-template-columns: repeat(14, minmax(0, 1fr));
+      font-size: 9.5px;
       font-weight: 700;
       color: var(--mute);
       text-transform: uppercase;
-      letter-spacing: 0.04em;
-      padding-left: 1px;
+      letter-spacing: 0.02em;
+      padding: 0 1px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .m-label-oct { grid-column: 1 / span 5; }
@@ -494,17 +521,24 @@
 
     .heatmap-grid {
       display: grid;
-      grid-template-columns: repeat(14, 1fr);
+      grid-template-columns: repeat(14, minmax(0, 1fr));
       grid-template-rows: repeat(7, 1fr);
       grid-auto-flow: column;
-      gap: 3.5px;
+      gap: 2.5px;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
     }
 
     .dot {
       aspect-ratio: 1;
+      width: 100%;
+      min-width: 0;
+      min-height: 0;
       border-radius: 3px;
       background: var(--cell-empty);
       border: 1px solid transparent;
+      box-sizing: border-box;
       position: relative;
       transition: transform 0.15s, box-shadow 0.15s;
     }
@@ -624,13 +658,16 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 8px;
+      width: 100%;
+      min-width: 0;
     }
 
     .daily-acts {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       align-items: center;
+      flex-shrink: 0;
     }
 
     .btn-act {
@@ -704,8 +741,10 @@
       bottom: 0;
       left: 0;
       right: 0;
-      max-width: 580px;
+      max-width: 560px;
+      width: 100%;
       margin: 0 auto;
+      box-sizing: border-box;
       height: calc(64px + env(safe-area-inset-bottom, 0px));
       padding-bottom: env(safe-area-inset-bottom, 0px);
       background: rgba(9, 14, 23, 0.94);
@@ -1089,8 +1128,8 @@
     #confetti-canvas {
       position: fixed;
       inset: 0;
-      width: 100vw;
-      height: 100vh;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
       z-index: 9999;
     }
@@ -1104,6 +1143,134 @@
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* =========================================================
+       RESPONSIVE MOBILE BREAKPOINTS (SMARTPHONES)
+       ========================================================= */
+    @media (max-width: 480px) {
+      main {
+        padding: 14px 10px 20px;
+      }
+
+      .top-bar {
+        margin-bottom: 14px;
+      }
+
+      .app-title {
+        font-size: 28px;
+      }
+
+      .metrics-row {
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+
+      .metric-card {
+        padding: 12px 8px 10px;
+      }
+
+      .streak-number {
+        font-size: 30px;
+      }
+
+      .streak-flame {
+        font-size: 24px;
+      }
+
+      .habit-card {
+        padding: 12px 10px;
+      }
+
+      .habit-head {
+        gap: 6px;
+        margin-bottom: 8px;
+      }
+
+      .habit-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+        border-radius: 9px;
+      }
+
+      .habit-name {
+        font-size: 14px;
+      }
+
+      .habit-desc {
+        font-size: 10.5px;
+      }
+
+      .habit-check-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+        border-radius: 9px;
+      }
+
+      .habit-streak, .habit-total {
+        font-size: 11px;
+      }
+
+      .heatmap-grid {
+        gap: 2px;
+      }
+
+      .heatmap-months {
+        font-size: 8.5px;
+      }
+
+      .btn-act {
+        padding: 6px 9px;
+        font-size: 12px;
+      }
+
+      .btn-icon-sm {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+      }
+
+      .mgmt-card {
+        padding: 10px;
+        gap: 8px;
+      }
+
+      .bottom-tab .tab-icon {
+        font-size: 18px;
+      }
+
+      .bottom-tab .tab-text {
+        font-size: 10px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      main {
+        padding: 12px 6px 18px;
+      }
+
+      .habit-card {
+        padding: 10px 6px;
+      }
+
+      .heatmap-grid {
+        gap: 1.5px;
+      }
+
+      .habit-left {
+        gap: 6px;
+      }
+
+      .habit-right {
+        gap: 4px;
+      }
+
+      .btn-act {
+        padding: 5px 7px;
+        font-size: 11px;
+      }
     }
   </style>
 </head>
@@ -1494,9 +1661,8 @@
       const offset = circ - (progressRatio * circ);
       ringFill.style.strokeDashoffset = offset;
 
-      // Compte à rebours à l'extérieur : "sur X jours restants"
-      const unitJours = daysLeft <= 1 ? "jour restant" : "jours restants";
-      $("metric-countdown-footer").innerHTML = `sur <span id="metric-countdown-val">${daysLeft}</span> ${unitJours}`;
+      // Compte à rebours à l'extérieur : "sur X"
+      $("metric-countdown-footer").innerHTML = `sur <span id="metric-countdown-val">${daysLeft}</span>`;
 
       // 2. Vue Grilles (Annuelle)
       renderYearlyView();
